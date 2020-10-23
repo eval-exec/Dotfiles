@@ -9,6 +9,11 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'chuling/ci_dark'
 
+Plug 'ianding1/leetcode.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'powerline/powerline'
+Plug 'ctrlpvim/ctrlp.vim'
+
 " optional
 Plug 'luochen1990/rainbow'
 
@@ -23,7 +28,12 @@ set relativenumber
 set number
 set number relativenumber
 set timeoutlen=1000 ttimeoutlen=0
+set showcmd
 
+set clipboard=unnamed
+" fold
+set foldmethod=syntax
+set nofoldenable
 
 "color scheme
 

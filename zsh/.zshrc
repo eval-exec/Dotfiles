@@ -243,7 +243,7 @@ dict() {
 
 export RUST_BACKTRACE=full
 alias emacs='emacs -nw'
-alias egit='emacsclient -c -t . '
+alias vi='emacsclient -c -t  '
 alias manz='LANG=zh_CN.UTF-8 man '
 
 #toilet -t -f 3d  "NORTHWESTERN" | lolcat
