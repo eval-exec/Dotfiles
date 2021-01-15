@@ -1,6 +1,6 @@
-#! /bin/sh
+#! /bin/bash
 set -e
-MAXCOUNT=200
+MAXCOUNT=3000
 if [[ $# != 0  ]]; then
     re='^[0-9]+$'
     if ! [[ $1 =~ $re  ]] ; then
@@ -9,22 +9,21 @@ if [[ $# != 0  ]]; then
     MAXCOUNT=$1
 fi
 count=1
-#MAXCOUNT=$(($RANDOM % 10 + 1 ))
 
+out="["
 
 while [ "$count" -le $MAXCOUNT ]; do
-    number[$count]=$RANDOM
-
-    if [[ $count -eq 1 ]]; then
-         printf "["
-    fi
-
-    echo -n $(($(expr $RANDOM % 20 + 1 ) ))
+#    out+=$(($RANDOM  ))
+r=$(od -An -N2 -d < /dev/urandom)
+r=$((r%110+1))
+out+=$r
     if [[ $count -ne $MAXCOUNT ]]; then
-         printf ","
+        out+=","
     else
-        printf "]\n"
+        out+="]"
     fi
 
-    let "count += 1"
+    ((count += 1))
 done
+
+echo $out

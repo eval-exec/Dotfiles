@@ -9,22 +9,22 @@ if [[ $# != 0  ]]; then
     MAXCOUNT=$1
 fi
 count=1
-#MAXCOUNT=$(($RANDOM % 10 + 1 ))
 
 
 while [ "$count" -le $MAXCOUNT ]; do
     number[$count]=$RANDOM
 
     if [[ $count -eq 1 ]]; then
-         printf "["
+        printf "["
     fi
 
-    echo -n $(($(expr $RANDOM % 20 + 1 ) ))
+    printf $(($(expr $RANDOM % 2)))
     if [[ $count -ne $MAXCOUNT ]]; then
-         printf ","
+        printf ","
     else
         printf "]\n"
     fi
 
     let "count += 1"
 done
+

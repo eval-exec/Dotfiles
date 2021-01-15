@@ -9,34 +9,50 @@ if [[ $# != 0  ]]; then
     MAXCOUNT=$1
 fi
 
+countm=3
+if [[ $# == 2  ]]; then
+    re='^[0-9]+$'
+    if ! [[ $1 =~ $re  ]] ; then
+        echo "error: Not a number" >&2; exit 1
+    fi
+    countm=$2
+fi
+
 row=1
-matrix="["
+echo -n "["
 while [ $row -le $MAXCOUNT ]; do
+    echo -n [
 
-out="["
-count=1
+        count=1
 
-    while [ "$count" -le $MAXCOUNT ]; do
+
+    while [ "$count" -le $countm ]; do
         #    out+=$(($RANDOM  ))
         r=$(od -An -N2 -d < /dev/urandom)
-        r=$((r%10))
-        out+=$r
-        if [[ $count -ne $MAXCOUNT ]]; then
-            out+=","
+        r=$((r%2 ))
+         if [[ r -eq 0 ]];
+         then 
+             r=-1;
+         else
+             r=1;
+         fi
+        echo -n $r
+        if [[ $count -ne $countm ]]; then
+            echo -n ,
         else
-            out+="]"
+            echo -n ]
         fi
 
         ((count += 1))
     done
-    matrix+=$out
+
     if [[ $row -ne $MAXCOUNT ]]; then
-        matrix+=","
+        echo -n ,
     else
-        matrix+="]"
+        echo -n ]
     fi
 
     ((row+= 1))
 
 done
-echo $matrix
+echo 
