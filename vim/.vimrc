@@ -1,11 +1,102 @@
-set runtimepath+=~/.vim_runtime
+set nocompatible  
+set encoding=utf-8
+set shortmess=I
+source ~/.vimrc.plugin
 
-source ~/.vim_runtime/vimrcs/basic.vim
-source ~/.vim_runtime/vimrcs/filetypes.vim
-source ~/.vim_runtime/vimrcs/plugins_config.vim
-source ~/.vim_runtime/vimrcs/extended.vim
+set number relativenumber
+set nu rnu
+syntax on
+filetype on  
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
+set pastetoggle=<F2>
+set showmode
+set guioptions=
 
-try
-source ~/.vim_runtime/my_configs.vim
-catch
-endtry
+" set shiftwidth=4
+set autoindent
+set smartindent
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
+set timeoutlen=1000 ttimeoutlen=0
+
+set wildmenu
+set wildmode=longest:full,full
+
+set ignorecase
+
+let g:AutoPairsFlyMode = 0
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
+
+set so=7
+
+syntax enable
+set t_Co=256
+set background=dark
+"colorscheme primary
+"colorscheme gruvbox-material
+"colorscheme challenger_deep
+"colorscheme gruvbox
+"colorscheme vividchalk
+"colorscheme abstract
+" let g:tokyonight_style = 'night' " available: night, storm
+" let g:tokyonight_enable_italic = 1
+" colorscheme tokyonight
+" colorscheme ayu
+" colorscheme PaperColor
+" colorscheme gruvbox8_hard
+"
+
+let g:material_terminal_italics = 1
+" let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
+let g:material_theme_style = 'darker'
+colorscheme material
+"highlight LineNr term=bold cterm=NONE ctermfg=White ctermbg=Black gui=NONE guifg=White guibg=NONE
+
+set cursorline
+" hi cursorline cterm=none term=none
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+highlight CursorLine guibg=#000000 ctermbg=000
+
+let g:indentLine_char = '▏'
+let g:indentLine_conceallevel = 1
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+
+
+"auto complete
+
+set conceallevel=2
+set concealcursor=vin
+let g:clang_snippets=1
+let g:clang_conceal_snippets=1
+let g:clang_snippets_engine='clang_complete'
+
+" Complete options (disable preview scratch window, longest removed to aways show menu)
+set completeopt=menu,menuone
+
+" Limit popup menu height
+set pumheight=20
+
+" SuperTab completion fall-back 
+let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
+
+let g:ale_sign_column_always = 1

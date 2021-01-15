@@ -1,0 +1,33 @@
+call plug#begin('~/.vim/plugged')
+Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
+Plug 'ayu-theme/ayu-vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'WolfgangMehner/bash-support'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'luochen1990/rainbow'
+Plug 'google/vim-colorscheme-primary'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep'  }
+Plug 'dracula/vim'
+Plug 'morhetz/gruvbox'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'farmergreg/vim-lastplace'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'xolox/vim-misc'
+Plug 'sainnhe/gruvbox-material'
+Plug 'tpope/vim-commentary'
+Plug 'cespare/vim-toml'
+Plug 'tpope/vim-vividchalk'
+Plug 'dkanas/phosphor.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'lifepillar/vim-gruvbox8'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'kaicataldo/material.vim', { 'branch': 'main'  }
+
+call plug#end()
