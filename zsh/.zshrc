@@ -11,7 +11,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-
+export DISABLE_MAGIC_FUNCTIONS=true
 export FONTCONFIG_PATH=/etc/fonts
 export ZSH="/home/vory/.oh-my-zsh"
 
@@ -92,6 +92,7 @@ plugins=(
        	zsh-autosuggestions
 	zsh-syntax-highlighting
 	colored-man-pages
+    #vi-mode
 	colorize
 	docker
 	zsh-256color
@@ -135,14 +136,13 @@ export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.emacs.d/bin
 
 # Enable the go modules feature
- export GO111MODULE=auto
+export GO111MODULE=auto
  export GIT_TERMINAL_PROMPT=1
  #source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
  
  
 
 
-export GO111MODULE=on
 
 alias proxyon="export HTTPS_PROXY=http://127.0.0.1:1081;export HTTP_PROXY=http://127.0.0.1:1081;"
 alias proxyoff="export HTTPS_PROXY=;export HTTP_PROXY=;"
@@ -163,9 +163,7 @@ alias yd="ydcv"
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
-export HISTFILE=~/.zsh_history
-export HISTSIZE=999999999
-export SAVEHIST=$HISTSIZE
+
 # fzf finder color
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=dark
@@ -250,7 +248,35 @@ alias manz='LANG=zh_CN.UTF-8 man '
 
 source /home/vory/.config/broot/launcher/bash/br
 
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
 
 # Google Mock Doctor tools
 # alias gmd='<path to googlemock>/scripts/gmock_doctor.py'
 
+alias cat='/usr/bin/bat -p --paging=never'
+alias bat='/usr/bin/cat'
+
+# source ~/github/enhancd/enhancd.plugin.zsh
+# export UPDATE_ZSH_DAYS=1
+function help(){
+        bash -c "help $@"
+}
+
+
+export KEYTIMEOUT=1
