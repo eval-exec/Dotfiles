@@ -1,6 +1,13 @@
 set nocompatible  
 set encoding=utf-8
 set shortmess=I
+set clipboard=unnamed
+set guioptions+=a
+
+set foldmethod=syntax
+set nofoldenable
+
+
 source ~/.vimrc.plugin
 
 set number relativenumber
@@ -42,7 +49,6 @@ set so=7
 
 syntax enable
 set t_Co=256
-set background=dark
 "colorscheme primary
 "colorscheme gruvbox-material
 "colorscheme challenger_deep
@@ -61,6 +67,9 @@ let g:material_terminal_italics = 1
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
 let g:material_theme_style = 'darker'
 colorscheme material
+set background=dark
+highlight Normal guibg=black guifg=white
+
 "highlight LineNr term=bold cterm=NONE ctermfg=White ctermbg=Black gui=NONE guifg=White guibg=NONE
 
 set cursorline

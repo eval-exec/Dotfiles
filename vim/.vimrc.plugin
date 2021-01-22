@@ -4,6 +4,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ayu-theme/ayu-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'WolfgangMehner/bash-support'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
