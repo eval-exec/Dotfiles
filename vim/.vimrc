@@ -1,11 +1,13 @@
 set nocompatible  
-set encoding=utf-8
+set encoding=UTF-8
 set shortmess=I
 set clipboard=unnamed
 set guioptions+=a
-
+set showcmd
 set foldmethod=syntax
 set nofoldenable
+
+let mapleader = ","
 
 
 source ~/.vimrc.plugin
@@ -109,3 +111,24 @@ set pumheight=20
 let g:SuperTabDefaultCompletionType='<c-x><c-u><c-p>'
 
 let g:ale_sign_column_always = 1
+
+let g:airline_powerline_fonts = 1
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |  quit | endif
+
+
+" airline
+let g:airline#extensions#tabline#enabled = 1
+
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_theme='molokai'
+
+
