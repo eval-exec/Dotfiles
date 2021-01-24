@@ -20,6 +20,12 @@ Plug 'tommcdo/vim-exchange'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
+
+
+Plug 'justinmk/vim-sneak'
 
 
 

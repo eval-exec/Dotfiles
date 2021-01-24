@@ -131,4 +131,39 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_theme='molokai'
 
+let g:sneak#label = 1
+" Mapping selecting mappings
+
+" Insert mode completion
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
+
+let g:fzf_preview_window = []
+let g:fzf_buffers_jump = 1
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+nmap <Leader>f :GFiles<CR>
+nmap <Leader>F :Files<CR>
+
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>h :History<CR>
+
+nmap <Leader>t :BTags<CR>
+nmap <Leader>T :Tags<CR>
+
+nmap <Leader>l :BLines<CR>
+nmap <Leader>L :Lines<CR>
+nmap <Leader>' :Marks<CR>'
+
+nmap <Leader>H :Helptags!<CR>
+
+nmap <Leader>C :Commands<CR>
+
+nmap <Leader>: :History:<CR>
+
+nmap <Leader>M :Maps<CR>
+nmap <Leader>s :Filetypes<CR>
+nmap <Leader>m :FZFMru<CR>
 
