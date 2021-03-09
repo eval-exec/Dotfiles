@@ -19,7 +19,7 @@ while [ "$count" -le $MAXCOUNT ]; do
          printf "["
     fi
 
-    echo -n $(($(expr $RANDOM % 20 + 1 ) ))
+    echo -n $(($(expr $RANDOM % 1000 - 500 ) ))
     if [[ $count -ne $MAXCOUNT ]]; then
          printf ","
     else

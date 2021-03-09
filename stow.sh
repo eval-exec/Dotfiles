@@ -4,3 +4,4 @@ stow zsh
 stow emacs
 stow vim
 stow ideavim
+stow tmux

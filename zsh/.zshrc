@@ -10,6 +10,7 @@ fi
 #
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+fpath+=~/.zfunc
 # Path to your oh-my-zsh installation.
 export DISABLE_MAGIC_FUNCTIONS=true
 export FONTCONFIG_PATH=/etc/fonts
@@ -90,7 +91,7 @@ plugins=(
 	#github
 	gitfast
 	battery
-       	zsh-autosuggestions
+    zsh-autosuggestions
 	zsh-syntax-highlighting
 	colored-man-pages
     #vi-mode
@@ -131,6 +132,7 @@ source $ZSH/oh-my-zsh.sh
 
 export GOBIN=/home/vory/go/bin
 export GOPATH=/home/vory/go
+# export CGO_ENABLED=0
 
 export PATH=$PATH:~/go/bin
 export PATH=$PATH:~/.local/bin
@@ -155,6 +157,8 @@ go env -w GOSUMDB=off
 COWPATH="$COWPATH:$HOME/.cowsay"
 
 alias yd="ydcv"
+alias ip='ip -color=auto'
+
 #source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 #
 #source zsh-syntax-highlighting.zsh
@@ -163,16 +167,18 @@ alias yd="ydcv"
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+export TMUX_FZF_LAUNCH_KEY="C-f"
 
 
 # fzf finder color
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color=dark
---color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
---color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color=dark
+# --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
+# --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
 
- --layout=reverse  --preview "bat --style=numbers --color=always --line-range :500 {}"
-'
+#  --layout=reverse 
+#  --preview "bat --style=numbers --color=always --line-range :500 {}"
+# '
 
 #figlet -t -funivers "hello slarsar"|lolcat
 # figlet -t  "hello hukary ! Let's Hack "|  lolcat 
@@ -240,7 +246,7 @@ dict() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export RUST_BACKTRACE=full
+# export RUST_BACKTRACE=full
 alias emacs='emacs -nw'
 alias vi='emacsclient -c -t  '
 alias manz='LANG=zh_CN.UTF-8 man '
@@ -282,4 +288,6 @@ function help(){
 
 export KEYTIMEOUT=1
 
+export PATH="$HOME/.radicle/bin:$PATH"
+[[ -s "/etc/grc.zsh"  ]] && source /etc/grc.zsh
 

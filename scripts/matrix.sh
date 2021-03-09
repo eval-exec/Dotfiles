@@ -29,14 +29,12 @@ while [ $row -le $MAXCOUNT ]; do
     while [ "$count" -le $countm ]; do
         #    out+=$(($RANDOM  ))
         r=$(od -An -N2 -d < /dev/urandom)
-        r=$((r%2 ))
-         if [[ r -eq 0 ]];
-         then 
-             r=-1;
-         else
-             r=1;
-         fi
-        echo -n $r
+        r=$((r% 3 ))
+        if [[ $r -eq 0 ]];then
+            echo -n 1
+        else
+            echo -n 0
+        fi
         if [[ $count -ne $countm ]]; then
             echo -n ,
         else

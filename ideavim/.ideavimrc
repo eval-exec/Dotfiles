@@ -44,11 +44,11 @@ nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 
 " Press `f` to activate AceJump
-map f :action AceAction<CR>
+"map f :action AceAction<CR>
 " Press `F` to activate Target Mode
-map F :action AceTargetAction<CR>
+"map F :action AceTargetAction<CR>
 " Press `g` to activate Line Mode
-map g :action AceLineAction<CR>
+"map g :action AceLineAction<CR>
 
 nmap <leader>e :action SearchEverywhere<CR>
 nmap <leader>t :action GotoClass<CR>
@@ -57,4 +57,5 @@ nmap <leader>T :action GotoSymbol<CR>
 nmap <leader>m :action RecentFiles<CR>
 nmap <leader>M :action RecentChangedFiles<CR>
 nmap <leader>] :action GotoImplementation<CR>
-
+nmap <a-j>     :action MethodDown<CR>
+nmap <a-k>     :action MethodUp<CR>

@@ -13,7 +13,7 @@ count=1
 out='"'
 
 while [ "$count" -le $MAXCOUNT ]; do
-    r=$(($RANDOM % 26))
+    r=$(($RANDOM % 26 ))
     let "r+=97"
     rr=$(printf \\$(printf '%03o' $r))
     out+=$rr

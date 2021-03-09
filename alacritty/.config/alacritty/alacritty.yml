@@ -109,8 +109,8 @@ font:
     #
     # Default:
     #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
+    # family: monospace
     family: Source Code Pro
 
     # The `style` can be specified to pick a specific face.

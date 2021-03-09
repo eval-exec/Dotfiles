@@ -3,7 +3,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ayu-theme/ayu-vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'WolfgangMehner/bash-support'
+
+Plug 'vim-scripts/bash-support.vim'
+
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries'  }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -27,9 +29,12 @@ Plug 'pbogut/fzf-mru.vim'
 
 Plug 'justinmk/vim-sneak'
 
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 
-
+Plug 'sainnhe/sonokai'
+Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'luochen1990/rainbow'

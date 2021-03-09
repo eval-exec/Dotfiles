@@ -20,7 +20,6 @@ filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 set pastetoggle=<F2>
 set showmode
-set guioptions=
 
 " set shiftwidth=4
 set autoindent
@@ -50,12 +49,12 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 set so=7
 
 syntax enable
-set t_Co=256
-"colorscheme primary
+" set t_Co=256
+" colorscheme primary
 "colorscheme gruvbox-material
 "colorscheme challenger_deep
 "colorscheme gruvbox
-"colorscheme vividchalk
+colorscheme vividchalk
 "colorscheme abstract
 " let g:tokyonight_style = 'night' " available: night, storm
 " let g:tokyonight_enable_italic = 1
@@ -65,20 +64,23 @@ set t_Co=256
 " colorscheme gruvbox8_hard
 "
 
-let g:material_terminal_italics = 1
-" let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
-let g:material_theme_style = 'darker'
-colorscheme material
+if has('termguicolors')
+  set termguicolors
+endif
+" 
+" let g:material_terminal_italics = 1
+" let g:material_theme_style = 'darker'
+" colorscheme material
 set background=dark
-highlight Normal guibg=black guifg=white
-
-"highlight LineNr term=bold cterm=NONE ctermfg=White ctermbg=Black gui=NONE guifg=White guibg=NONE
-
-set cursorline
-" hi cursorline cterm=none term=none
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
-highlight CursorLine guibg=#000000 ctermbg=000
+" highlight Normal guibg=black guifg=white
+" 
+" "highlight LineNr term=bold cterm=NONE ctermfg=White ctermbg=Black gui=NONE guifg=White guibg=NONE
+" 
+" set cursorline
+" " hi cursorline cterm=none term=none
+" autocmd WinEnter * setlocal cursorline
+" autocmd WinLeave * setlocal nocursorline
+" highlight CursorLine guibg=#000000 ctermbg=000
 
 let g:indentLine_char = '▏'
 let g:indentLine_conceallevel = 1
@@ -167,3 +169,10 @@ nmap <Leader>M :Maps<CR>
 nmap <Leader>s :Filetypes<CR>
 nmap <Leader>m :FZFMru<CR>
 
+" snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
