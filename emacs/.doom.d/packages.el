@@ -48,3 +48,10 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+(package! dashboard :recipe(:repo "emacs-dashboard/emacs-dashboard"))
+(package! beacon :recipe(:repo "Malabarba/beacon"))
+
+(package! all-the-icons-ibuffer :recipe(:repo "seagle0128/all-the-icons-ibuffer"))
+(package! nyan-mode :recipe(:repo "TeMPOraL/nyan-mode"))
+(package! benchmark-init)
+(package! org-super-agenda)
