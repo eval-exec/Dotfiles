@@ -13,11 +13,7 @@ count=1
 
 echo -n \"
 while [ "$count" -le $MAXCOUNT ]; do
-    if [[ $(($RANDOM % 5)) -eq 0 ]];then
-        echo -n $(($RANDOM % 2 + 1 ))
-    else
-        echo -n $(($RANDOM % 9 + 1 ))
-    fi
+    echo -n $(($RANDOM %2))
     ((count += 1))
 done
 echo  \"

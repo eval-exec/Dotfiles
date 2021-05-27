@@ -96,7 +96,7 @@
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
-  history: 10000
+  history: 5000
 
   # Scrolling distance multiplier.
   #multiplier: 3
@@ -111,7 +111,13 @@ font:
     #   - (macOS) Menlo
     #   - (Windows) Consolas
     # family: monospace
-    family: Source Code Pro
+    # family: Source Code Pro
+    # family: ""
+    # family: unifont
+    # family: "MesloLGS NF"
+
+    family: "Source Code Pro"
+    # family: "Noto Sans Mono"
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -157,7 +163,7 @@ font:
   # spacing.
   offset:
     x: 0
-    y: 0
+    y: -4
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -422,7 +428,7 @@ cursor:
   #vi_mode_style: None
 
   # Cursor blinking interval in milliseconds.
-  blink_interval: 100
+  blink_interval: 80
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -471,7 +477,7 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: true
 
-  #url:
+    # url:
     # URL launcher
     #
     # This program is executed when clicking on a text which is recognized as a
@@ -483,9 +489,9 @@ mouse:
     #   - (macOS) open
     #   - (Linux/BSD) xdg-open
     #   - (Windows) explorer
-    #launcher:
-    #  program: xdg-open
-    #  args: []
+    # launcher:
+    #  program: firefox
+    #  args: ["--new-window"]
 
     # URL modifiers
     #

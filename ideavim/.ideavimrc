@@ -17,14 +17,13 @@ set sidescroll=10
 let mapleader = ","
 
 
-set easymotion
 set sneak
 set surround
 " set multiple-cursors
 set commentary
 "set ReplaceWithRegister
 "set argtextobj
-"set exchange
+set exchange
 "set textobj-entire
 
 
@@ -59,3 +58,21 @@ nmap <leader>M :action RecentChangedFiles<CR>
 nmap <leader>] :action GotoImplementation<CR>
 nmap <a-j>     :action MethodDown<CR>
 nmap <a-k>     :action MethodUp<CR>
+" nmap <C-S-k>   :action AceTargetAction<CR>
+nmap <C-S-j>   :action AceTargetAction<CR>
+
+" AceAction
+" AceDeclarationAction
+" AcelineAction
+" AcelineEndsAction
+" AcelLineIndentsAction
+" AcelineStartsAction
+" AceReverseAction
+" AceTargetAction
+" AceWordAction
+" AceWordBackwardsAction
+" AceWordEndAction
+" AceWordForwardAction
+" AceWordStartAction
+"
+"

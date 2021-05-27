@@ -48,6 +48,8 @@
 (load "~/.emacs.d/load-directory")
 (load-directory "~/.emacs.d/config")
 
+(winner-mode 1)
+
 
 ;; (setq url-proxy-services '(
 ;; 						   ("no_proxy" . "^\\(*.tsinghua.*\\)")

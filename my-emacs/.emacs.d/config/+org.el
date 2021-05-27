@@ -1,12 +1,10 @@
 (leaf org
 
   :bind (
-		 ("C-c l" . org-store-link)
-		 ("C-c a" . org-agenda)
-		 ("C-c c" . org-capture)
+		 ("C-c o l" . org-store-link)
+		 ("C-c o a" . org-agenda)
+		 ("C-c o c" . org-capture)
 		 )
-  :hook (org-agenda-mode-hook .  (lambda ()
-								   (display-line-numbers-mode -1)))
   :hook (org-trigger-hook . save-buffer)
   
   :config
@@ -25,6 +23,8 @@
   (setq org-ellipsis "\"⤵\"")
 
   (setq org-default-notes-file "~/org/notes/")
+  (setq org-todo-keywords '((sequence "TODO" "DONE" "CANCEL")))
+
 
   (setq org-capture-templates
 		'(
@@ -89,50 +89,91 @@
   :bind
   (
    (:org-roam-mode-map
-	("C-c n l" . org-roam)
-	("C-c n f" . org-roam-find-file)
+	("C-c o r l" . org-roam)
+	("C-c o r f f" . org-roam-find-file)
 
-	("C-c n d"   . org-roam-dailies-find-date)
-	("C-c n c"   . org-roam-dailies-capture-today)
-	("C-c n C r" . org-roam-dailies-capture-tomorrow)
-	("C-c n t"   . org-roam-dailies-find-today)
-	("C-c n y"   . org-roam-dailies-find-yesterday)
-	("C-c n r"   . org-roam-dailies-find-tomorrow)
-	("C-c n g" . org-roam-graph)
+	("C-c o r d"   . org-roam-dailies-find-date)
+	("C-c o r c"   . org-roam-dailies-capture-today)
+	("C-c o r C r" . org-roam-dailies-capture-tomorrow)
+	("C-c o r f t"   . org-roam-dailies-find-today)
+	("C-c o r f y"   . org-roam-dailies-find-yesterday)
+	("C-c o r f r"   . org-roam-dailies-find-tomorrow)
+	("C-c o r g" . org-roam-graph)
 	)
 
    (:org-mode-map
-	("C-c n i" . org-roam-insert)
-	("C-c n I" . org-roam-insert-immediate))
+	("C-c o r i" . org-roam-insert)
+	("C-c o r I" . org-roam-insert-immediate))
    )
 
   :custom
   (org-roam-directory . "~/org/roam/")
   (org-roam-db-location . "~/.cache/org-roam-db/roam.db")
   :config
-  ;;  (setq org-roam-capture-templates
-  ;; 		'(
-  ;; 		  ("d" "default" plain (function org-roam--capture-get-point)
-  ;; 		   "%?"
-  ;; 		   :file-name "%(format-time-string \"%Y-%m-%d--%H-%M-%SZ--${slug}\" (current-time) t)"
-  ;; 		   :head "#+title: ${title}\n"
-  ;; 		   :unnarrowed t)
-  ;; 		  ("ll" "link note" plain
-  ;; 		   #'org-roam-capture--get-point
-  ;; 		   "* %^{Link}"
-  ;; 		   :file-name "Inbox"
-  ;; 		   :olp ("Links")
-  ;; 		   :unnarrowed t
-  ;; 		   :immediate-finish)
-  ;; 		  ("lt" "link task" entry
-  ;; 		   #'org-roam-capture--get-point
-  ;; 		   "* TODO %^{Link}"
-  ;; 		   :file-name "Inbox"
-  ;; 		   :olp ("Tasks")
-  ;; 		   :unnarrowed t
-  ;; 		   :immediate-finish)
-  ;; 		  )
-  ;; 		)
+
+  (setq org-roam-db-update-method 'immediate)
+  (setq org-roam-completion-ignore-case t)
+  (setq org-roam-completion-system 'helm)
+  ;;(setq org-roam-buffer-width 0.382)
+  (setq org-roam-buffer-width 0.33)
+  (setq org-roam-completion-everywhere t)
+
+  (setq org-roam-index-file "Index.org")
+
+  (defun EXEC/org-roam--title-to-slug (title)
+	"Convert TITLE to a filename-suitable slug."
+	(cl-flet* ((nonspacing-mark-p (char)
+                                  (memq char org-roam-slug-trim-chars))
+               (strip-nonspacing-marks (s)
+                                       (ucs-normalize-NFC-string
+										(apply #'string (seq-remove #'nonspacing-mark-p
+																	(ucs-normalize-NFD-string s)))))
+               (cl-replace (title pair)
+                           (replace-regexp-in-string (car pair) (cdr pair) title)))
+      (let* ((pairs `(("[^[:alnum:][:digit:]]" . "_")  ;; convert anything not alphanumeric
+                      ("__*" . "_")  ;; remove sequential underscores
+                      ("^_" . "")  ;; remove starting underscore
+                      ("_$" . "")))  ;; remove ending underscore
+			 (slug (-reduce-from #'cl-replace (strip-nonspacing-marks title) pairs)))
+		(format "%s" slug)
+		)))
+  (setq org-roam-title-to-slug-function 'EXEC/org-roam--title-to-slug)
+
+  (format-time-string "%Y-%m-%d-%a-%H:%M:%S")
+
+  (setq org-roam-capture-templates
+		'(
+		  ("d" "default" plain (function org-roam--capture-get-point)
+		   "%?"
+		   ;;:file-name "%(format-time-string \"${slug}--%Y-%m-%d-%a-%H-%M-%S\" (current-time) t)"
+		   ;;:file-name "${slug}--%<%Y%m%d%H%M%S>"
+	 ;; 	   :file-name "%(format-time-string \"${slug}--%s\" (format-time-string '%Y-%m-%d-%a-%T') t)"
+     ;; :file-name "%(format-time-string \"%Y-%m-%d--%H-%M-%SZ--${slug}\" (current-time) t)"
+
+  ;:file-name "%(format \"${slug}--%s\" (format-time-string \"%Y-%m-%d-%a--%H:%M:%S\"))"
+  :file-name "%(format-time-string \"${slug}__%Y-%m-%d-%H:%M:%S\")"
+
+
+
+		   :head "#+title: ${title}\n"
+		   :unnarrowed t)
+		  ("ll" "link note" plain
+		   #'org-roam-capture--get-point
+		   "* %^{Link}"
+		   :file-name "Inbox"
+		   :olp ("Links")
+		   :unnarrowed t
+		   :immediate-finish)
+		  ("lt" "link task" entry
+		   #'org-roam-capture--get-point
+		   "* TODO %^{Link}"
+		   :file-name "Inbox"
+		   :olp ("Tasks")
+		   :unnarrowed t
+		   :immediate-finish)
+		  )
+		
+		)
 
 
 
@@ -168,13 +209,33 @@
 			 :file-name "Journal/%<%Y-%m-%d>"
 			 :olp ("Log")
 			 :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")))
+
+
+  ;;; org-roam-server
+  (leaf org-roam-server
+	:config
+	(setq org-roam-server-host "127.0.0.1"
+          org-roam-server-port 3333
+          org-roam-server-authenticate nil
+          org-roam-server-export-inline-images t
+          org-roam-server-serve-files nil
+          org-roam-server-served-file-extensions '("pdf" "mp4" "ogv" "org")
+          org-roam-server-network-poll t
+          org-roam-server-network-arrows nil
+          org-roam-server-network-label-truncate t
+          org-roam-server-network-label-truncate-length 60
+          org-roam-server-network-label-wrap-length 20)
+(require 'org-roam-protocol)
+(org-roam-server-mode)
+
+	)
   )
 
 
 (leaf org-journal
   :bind
   (
-   ("C-c C-j" . org-journal-new-entry)
+   ("C-c o j" . org-journal-new-entry)
    )
   :config
   (setq org-journal-dir "~/org/journal/")

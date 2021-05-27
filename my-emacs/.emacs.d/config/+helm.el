@@ -31,13 +31,11 @@
 	("M-I" . helm-swoop-back-to-last-point)
 	("C-c M-i" . helm-multi-swoop)
 	("C-x M-i" . helm-multi-swoop-all)
-
 	)
 
 
   (leaf helm-descbinds
 	:config (helm-descbinds-mode))
-
   )
 
 
