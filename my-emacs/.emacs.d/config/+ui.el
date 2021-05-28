@@ -14,18 +14,18 @@
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
 
-  (setq dashboard-items '((recents  . 20)
-						  (bookmarks . 5)
-						  (projects . 5)
+  (setq dashboard-items '((recents  . 100)
+						  (bookmarks . 20)
+						  (projects . 50)
 										;(agenda . 5)
-						  (registers . 5)))
+						  (registers . 20)))
   (setq dashboard-set-init-info t)
   (dashboard-setup-startup-hook)
   )
 
 (leaf doom-modeline
   :config
-  (setq doom-modeline-height  (window-font-height))
+  (setq doom-modeline-height  (window-font-height) )
   (setq doom-modeline-project-detection  'project)
   (setq doom-modeline-buffer-encoding  nil)
   (setq doom-modeline-major-mode-color-icon  t)
@@ -46,6 +46,7 @@
 ;;    :config
 ;;    (beacon-mode))
 
+(setq resize-mini-windows 'fit)
 (leaf paren
   :config
   (show-paren-mode 1))
@@ -62,3 +63,15 @@
   (setq centaur-tabs-set-modified-marker t)
   (setq centaur-tabs-modified-marker "*")
   )
+
+(leaf writeroom-mode
+  :bind
+  (:writeroom-mode-map
+   ("C-M-<" .  writeroom-decrease-width)
+   ("C-M->" .  writeroom-increase-width)
+   ("C-M-=" .  writeroom-adjust-width)
+   )
+  :custom
+  (writeroom-width . 148)
+  )
+

@@ -26,7 +26,19 @@
 (leaf leaf
   :custom ((leaf-defaults . '(:ensure t))))
 
+(leaf gcmh
+  (gcmh-mode 1)
+  )
+
 (set-default-coding-systems 'utf-8)
+(leaf exec-path-from-shell
+  :config
+
+  (setenv   "GOPATH" "/home/vory/go")
+  (setenv "GOBIN" "/home/vory/go/bin")
+  (setenv "GO111MODULE" "auto")
+
+ ( exec-path-from-shell-initialize))
 
 (leaf leaf-tree :ensure t)
 (leaf leaf-convert :ensure t)

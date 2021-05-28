@@ -25,7 +25,7 @@
 
 ;; (leaf projectile
 ;;   :init (projectile-mode +1)
- 
+
 ;;   :config
 ;;   (setq projectile-enable-caching t
 ;; 		projectile-completion-system 'helm   )
@@ -90,8 +90,19 @@
   :hook (after-init  global-emojify-mode))
 
 (leaf hungry-delete
-  :hook(after-init . global-hangry-delete-mode))
+  :config
+  (global-hungry-delete-mode)
+  )
 
 
 
+
+
+(setq confirm-kill-emacs 'yes-or-no-p)
+
+(leaf nov
+  :config
+  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+  )
 

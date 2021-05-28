@@ -80,6 +80,9 @@
   (leaf evil-commentary
 	:config
 	(evil-commentary-mode))
+  (leaf evil-surround
+	:config
+	(evil-surround-mode))
   )
 
 

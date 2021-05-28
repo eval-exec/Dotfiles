@@ -248,3 +248,7 @@
   (setq org-journal-enable-cache t)
   )
 
+
+(leaf hl-todo
+  :config
+  (hl-todo-mode))
