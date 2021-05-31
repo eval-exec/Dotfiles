@@ -1,6 +1,7 @@
 (leaf yasnippet
   :config
   (leaf yasnippet-snippets
-	)
-  (yas-global-mode 1)
+    )
+  :global-minor-mode  yas-global-mode
   )
+

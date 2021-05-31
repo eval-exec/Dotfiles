@@ -10,8 +10,8 @@
 
 
   (setq view-diary-entries-initially t
-		mark-diary-entries-in-calendar t
-		number-of-diary-entries 7)
+	mark-diary-entries-in-calendar t
+	number-of-diary-entries 7)
   (add-hook 'diary-display-hook 'fancy-diary-display)
   (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
 
@@ -39,6 +39,8 @@
   (global-hl-line-mode))
 
 (leaf fcitx
+  :after evil
+  
   :custom
   (fcitx-remote-command . "/usr/bin/fcitx5-remote")
   :config
@@ -70,18 +72,16 @@
    ;; By default, C-h C is bound to describe `describe-coding-system'. I
    ;; don't find this very useful, but it's frequently useful to only
    ;; look at interactive functions.
-   ("C-h C" . helpful-command)))
-
-(leaf super-save
-  :custom
-  (super-save-auto-save-when-idle . t)
-  :config
-  (super-save-mode +1)
+   ("C-h C" . helpful-command))
+  :hook (after-init-hook . helpful-mode)
   )
 
-
-
-
+(leaf super-save
+  ;; :custom
+  ;; (super-save-auto-save-when-idle . nil)
+  ;; (super-save-idle-duration . 1)
+  ;; :global-minor-mode super-save-mode
+  )
 
 
 
@@ -98,7 +98,6 @@
 
 
 
-(setq confirm-kill-emacs 'yes-or-no-p)
 
 (leaf nov
   :config
@@ -106,3 +105,101 @@
 
   )
 
+
+(leaf winner
+  :tag "builtin"
+  :bind(
+	("M-<left>" . winner-undo)
+	("M-<right>" . winner-redo)
+	)
+  :global-minor-mode winner-mode
+  )
+
+(leaf pangu-spacing
+  :custom
+  (pangu-spacing-real-insert-separtor . t)
+  :global-minor-mode global-pangu-spacing-mode
+  )
+
+(setq confirm-kill-emacs 'yes-or-no-p)
+(tool-bar-mode -1)
+
+(leaf google-translate
+  :init(lambda x()
+	(defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
+	)
+  :custom
+  (
+   (google-translate-default-source-language . "en")
+   (google-translate-default-target-language . "zh-CN")
+
+   (google-translate--tkk-url . "https://translate.google.cn/")
+   (google-translate-base-url . "https://translate.google.cn/translate_a/single")
+   (google-translate-listen-url . "https://translate.google.cn/translate_tts")
+   (google-translate-backend-method  . 'curl)
+   (google-translate-output-destination . 'echo-area)
+
+
+   (google-translate-translation-directions-alist .    '(("en" . "zh-CN") ("zh-CN" . "en") ))
+   )
+  :bind(
+	("C-c t t" . google-translate-at-point)
+	("C-c t s" . google-translate-smooth-translate)
+	)
+  )
+
+(leaf saveplace
+  :tag "builtin"
+  :global-minor-mode save-place-mode)
+
+(leaf atomic-chrome
+  :hook (after-init-hook . atomic-chrome-start-server)
+  :config
+  (setq atomic-chrome-enable-auto-update nil)
+  )
+
+
+(setq display-line-numbers 'visual)
+(setq display-line-numbers-type 'visual)
+
+
+
+(defun toggle-display-global-line-numbers() 
+  (interactive)
+
+  (if (bound-and-true-p global-display-line-numbers-mode)
+      (setq on -1)
+    (setq on +1)
+    )
+  (global-display-line-numbers-mode on)
+  )
+
+(defun toggle-display-line-numbers() 
+  (interactive)
+
+  (if (bound-and-true-p display-line-numbers-mode)
+      (setq on -1)
+    (setq on +1)
+    )
+  (display-line-numbers-mode on)
+  )
+
+(global-set-key (kbd "<f6>")
+		(lambda ()
+		  (interactive)
+		  (toggle-display-line-numbers)
+		  )
+		)
+
+(global-set-key (kbd "C-c <f6>")
+		(lambda ()
+		  (interactive)
+		  (toggle-display-global-line-numbers)
+		  )
+		)
+
+(leaf pdf-tools
+  :config
+  (pdf-loader-install)
+  :hook (pdf-view-mode . pdf-view-auto-slice-minor-mode)
+  )
