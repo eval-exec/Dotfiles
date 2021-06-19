@@ -2,14 +2,6 @@
   :bind
   ("C-x C-b" . ibuffer)
   :config
-  (leaf ibuffer-project
-    ;; :hook (ibuffer .  (lambda ()
-    ;; 			(setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
-    ;; 			)
-    ;; 		   )
-
-    (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
-    )
   (leaf all-the-icons-ibuffer
     :init
     (setq  all-the-icons-ibuffer-human-readable-size t)
@@ -22,4 +14,19 @@
 						" " (filename-and-process+ -1 -1 :left))))
     (all-the-icons-ibuffer-mode 1)
     )
+
+  (leaf ibuffer-project
+    ;; :hook (ibuffer .  (lambda ()
+    ;; 			(setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+    ;; 			)
+    ;; 		   )
+
+    (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+    )
   )
+
+;; (leaf perspective
+;;   :bind
+;;   ("C-x C-b" . persp-list-buffers)   ; or use a nicer switcher, see below
+;;   :config
+;;   (persp-mode))

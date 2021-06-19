@@ -2,7 +2,8 @@
   :config
   ;(setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
 
-  ;; (setq dashboard-startup-banner nil)
+  ;;(setq dashboard-startup-banner "~/Pictures/avator/heckert_gnu.png")
+ ;; (setq dashboard-startup-banner "~/Pictures/lisa1.jpg")
 
 
 ;;   (setq dashboard-startup-banner 
@@ -28,7 +29,7 @@
 
 (leaf doom-modeline
   :config
-  (setq doom-modeline-height  (window-font-height) )
+  (setq doom-modeline-height  (window-font-height)) 
   (setq doom-modeline-project-detection  'project)
   (setq doom-modeline-buffer-encoding  nil)
   (setq doom-modeline-major-mode-color-icon  t)
@@ -97,17 +98,24 @@
   ;; )
 
 (leaf atom-one-dark-theme)
+(leaf github-theme)
+(leaf almost-mono-themes
+  :config
+  (load-theme 'almost-mono-black t)
+  )
 
 ;; (leaf nasy-theme
 ;;   :ensure nil
 ;;   :quelpa (nasy-theme :fetcher github :repo "nasyxx/emacs-nasy-theme")
 ;; )
 
+;; (leaf nebula-theme
+;;   :quelpa ( nebula-theme :fetcher github :repo "pkazmier/doom-nebula-theme")
+;;   )
+
 (leaf doom-themes)
 (leaf all-the-icons)
 (leaf all-the-icons-dired
-  )
-(leaf all-the-icons-gnus
   )
 (leaf treemacs-all-the-icons
   )
@@ -122,3 +130,5 @@
   ;; 	'(:eval (list (nyan-create)))
   ;; 	 ))
   )
+
+(leaf material-theme)

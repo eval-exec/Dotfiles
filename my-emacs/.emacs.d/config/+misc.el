@@ -12,8 +12,6 @@
   (setq view-diary-entries-initially t
 	mark-diary-entries-in-calendar t
 	number-of-diary-entries 7)
-  (add-hook 'diary-display-hook 'fancy-diary-display)
-  (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
 
   (setq diary-file "~/org/diary/diary")
   )
@@ -73,7 +71,6 @@
    ;; don't find this very useful, but it's frequently useful to only
    ;; look at interactive functions.
    ("C-h C" . helpful-command))
-  :hook (after-init-hook . helpful-mode)
   )
 
 (leaf super-save
@@ -102,19 +99,17 @@
 (leaf nov
   :config
   (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-
   )
 
 
 (leaf winner
   :tag "builtin"
   :bind(
-	("M-<left>" . winner-undo)
-	("M-<right>" . winner-redo)
+	("H-<left>" . winner-undo)
+	("H-<right>" . winner-redo)
 	)
   :global-minor-mode winner-mode
   )
-
 (leaf pangu-spacing
   :custom
   (pangu-spacing-real-insert-separtor . t)
@@ -124,10 +119,9 @@
 (setq confirm-kill-emacs 'yes-or-no-p)
 (tool-bar-mode -1)
 
+(defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
 (leaf google-translate
-  :init(lambda x()
-	(defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
-	)
+  :config
   :custom
   (
    (google-translate-default-source-language . "en")
@@ -159,8 +153,6 @@
   )
 
 
-(setq display-line-numbers 'visual)
-(setq display-line-numbers-type 'visual)
 
 
 
@@ -175,12 +167,11 @@
   )
 
 (defun toggle-display-line-numbers() 
-  (interactive)
-
-  (if (bound-and-true-p display-line-numbers-mode)
-      (setq on -1)
-    (setq on +1)
-    )
+(setq display-line-numbers 'visual)
+(setq display-line-numbers-type 'visual)
+  (setq on +1)
+  ;(interactive)
+  (if (bound-and-true-p display-line-numbers-mode) (setq on -1))
   (display-line-numbers-mode on)
   )
 
@@ -200,6 +191,5 @@
 
 (leaf pdf-tools
   :config
-  (pdf-loader-install)
-  :hook (pdf-view-mode . pdf-view-auto-slice-minor-mode)
+  ;(pdf-loader-install)
   )

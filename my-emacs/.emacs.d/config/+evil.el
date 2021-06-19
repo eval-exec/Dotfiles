@@ -18,6 +18,11 @@
   (evil-undo-system . 'undo-tree)
   
   :config
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "SPC") nil)
+  (define-key evil-motion-state-map (kbd "RET") nil)
+  (define-key evil-motion-state-map (kbd "TAB") nil))
+
 
 
 
@@ -100,6 +105,10 @@
 
 
     :global-minor-mode global-evil-surround-mode
+    )
+  (leaf evil-terminal-cursor-changer
+    :config
+    (evil-terminal-cursor-changer-activate) ; or (etcc-on)
     )
   )
 

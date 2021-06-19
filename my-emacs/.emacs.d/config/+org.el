@@ -103,6 +103,7 @@
   (org-agenda-use-tag-inheritance . t)
 ;;;;;;; org-agenda-end
 
+  (org-startup-with-inline-images . t)
   ( org-tag-beautify-mode .  t)
   ( org-confirm-babel-evaluate . nil)
   ( org-return-follows-link  . t)
@@ -110,7 +111,7 @@
   ( org-enforce-todo-checkbox-dependencies . t)
 
 
-  (org-ellipsis  . "\"⤵\"")
+  (org-ellipsis  . "⤵")
   (org-default-notes-file . "~/org/notes/")
   (org-capture-templates .
 			 '(
@@ -148,8 +149,9 @@
 			 )
   :config
 
+
   (leaf org-superstar
-    :hook (org-mode . org-superstar-mode)
+    :hook (org-mode-hook . org-superstar-mode)
     :config
     (setq org-hide-leading-stars nil)
     (setq org-superstar-leading-bullet ?\s)
@@ -163,9 +165,9 @@
 
   (leaf org-appear
     :after (org)
-    :hook (org-mode . org-appear-mode)
+    :hook (org-mode-hook . org-appear-mode)
     )
-  )
+)
 
 
 
@@ -194,26 +196,29 @@
 	 )
 
   :custom
-  (org-roam-directory . "~/org/roam/")
+
+  (org-roam-buffer-width . 0.33)
+
+  (org-roam-completion-everywhere . t)
+  (org-roam-completion-ignore-case . t)
+  (org-roam-completion-system . 'helm)
+  (org-roam-include-type-in-ref-path-completions . nil)
+
   (org-roam-db-location . "~/.cache/org-roam-db/roam.db")
+  (org-roam-db-update-method . 'immediate)
+  (org-roam-directory . "~/org/roam/")
 
   (org-roam-file-completion-tag-position . 'append)
   (org-roam-graph-shorten-titles . 'wrap)
   (org-roam-include-type-in-ref-path-completions . t)
   (org-roam-protocol-store-links . t)
-
-  (org-roam-db-update-method . 'immediate)
-  (org-roam-completion-ignore-case . t)
-  (org-roam-completion-system . 'helm)
-  (org-roam-buffer-width . 0.33)
-  (org-roam-completion-everywhere . t)
   (org-roam-title-to-slug-function . 'EXEC/org-roam--title-to-slug)
 
   (org-roam-capture-templates . '(
 				("d" "default" plain (function org-roam--capture-get-point)
 				 "%?"
 				 :file-name "%(format-time-string \"${slug}__%Y-%m-%d-%H:%M:%S\")"
-				 :head "#+title: ${title}\n#+CREATED: %U\n#+LAST_MODIFIED: %U\n#+ROAM_TAGS: \n"
+				 :head "#+TITLE: ${title}\n#+CREATED: %U\n#+LAST_MODIFIED: %U\n#+ROAM_TAGS: \n"
 				 :unnarrowed t)
 				("ll" "link note" plain
 				 #'org-roam-capture--get-point
@@ -237,7 +242,7 @@
 					 #'org-roam-capture--get-point
 					 "* %?"
 					 :file-name "Journal/%<%Y-%m-%d>"
-					 :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+					 :head "#+TITLE: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
 					("t" "Task" entry
 					 #'org-roam-capture--get-point
 					 "* TODO %?\n  %U\n  %a\n  %i"
@@ -278,7 +283,7 @@
     (org-roam-server-network-label-truncate . t )
     (org-roam-server-network-label-truncate-length . 60 )
     (org-roam-server-network-label-wrap-length . 20)
-    :global-minor-mode org-roam-server-mode
+    ;;:global-minor-mode org-roam-server-mode
     )
   )
 
