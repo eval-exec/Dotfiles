@@ -1,29 +1,27 @@
 (leaf dashboard
+  
   :config
   ;(setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
 
-  ;;(setq dashboard-startup-banner "~/Pictures/avator/heckert_gnu.png")
- ;; (setq dashboard-startup-banner "~/Pictures/lisa1.jpg")
-
+;; (setq dashboard-startup-banner "~/Pictures/avator/heckert_gnu.png")
+  ;;(setq dashboard-startup-banner "~/Pictures/dark-skull.png")
+  (setq dashboard-startup-banner "~/Pictures/ghost1.png")
+  (setq dashboard-footer   "While any text editor can save your files, only Emacs can save your soul")
 
 ;;   (setq dashboard-startup-banner 
 ;; ;"~/.emacs.d/banners/logo.txt"
 ;; "~/.emacs.d/banners/alien.txt"
 ;; )
-										;(setq dashboard-startup-banner "~/.emacs.d/banner/nasa.txt")
-
   (setq dashboard-center-content t)
-
-
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
 
   (setq dashboard-items '((recents  . 100)
-						  (bookmarks . 50)
-						  (projects . 50)
-										;(agenda . 5)
-						  (registers . 50)))
+			  (bookmarks . 50)
+			  (projects . 50)
+					;(agenda . 5)
+			  (registers . 50)))
   (setq dashboard-set-init-info t)
   (dashboard-setup-startup-hook)
 

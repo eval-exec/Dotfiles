@@ -89,7 +89,7 @@
 	 )
   :hook
   (
-   (before-save .   skx-org-mode-before-save-hook)
+   (before-save-hook .   skx-org-mode-before-save-hook)
    (org-trigger-hook . save-buffer)
    )
 

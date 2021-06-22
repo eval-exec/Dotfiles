@@ -193,3 +193,24 @@
   :config
   ;(pdf-loader-install)
   )
+
+
+(leaf use-proxy
+  :custom
+  (use-proxy-http-proxy . "127.0.0.1:1081")
+  (use-proxy-https-proxy . "127.0.0.1:1081")
+ (use-proxy-display-in-global-mode-string . nil)
+  :config
+  (use-proxy-mode)
+  )
+
+(leaf telega
+  :config
+  
+  (setq telega-proxies
+	(list
+	 '(:server "127.0.0.1" :port 1080 :enable t
+                   :type (:@type "proxyTypeSocks5"))
+	 )))
+
+
