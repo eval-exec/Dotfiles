@@ -34,7 +34,8 @@
 ;;   )
 (leaf hl-line
   :config
-  (global-hl-line-mode))
+ ; (global-hl-line-mode)
+  )
 
 (leaf fcitx
   :after evil
@@ -204,13 +205,16 @@
   (use-proxy-mode)
   )
 
-(leaf telega
-  :config
+;; (leaf telega
+;;   :config
   
-  (setq telega-proxies
-	(list
-	 '(:server "127.0.0.1" :port 1080 :enable t
-                   :type (:@type "proxyTypeSocks5"))
-	 )))
+;;   (setq telega-proxies
+;; 	(list
+;; 	 '(:server "127.0.0.1" :port 1080 :enable t
+;;                    :type (:@type "proxyTypeSocks5"))
+;; 	 )))
 
 
+
+
+(leaf vimrc-mode)

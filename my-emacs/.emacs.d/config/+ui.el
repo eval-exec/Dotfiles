@@ -5,7 +5,9 @@
 
 ;; (setq dashboard-startup-banner "~/Pictures/avator/heckert_gnu.png")
   ;;(setq dashboard-startup-banner "~/Pictures/dark-skull.png")
-  (setq dashboard-startup-banner "~/Pictures/ghost1.png")
+  ;;(setq dashboard-startup-banner "~/Pictures/ghost1.png")
+ ;;(setq dashboard-startup-banner "~/Pictures/skull-logo-transparent-4.png")
+ (setq dashboard-startup-banner "~/Pictures/Pik.png")
   (setq dashboard-footer   "While any text editor can save your files, only Emacs can save your soul")
 
 ;;   (setq dashboard-startup-banner 
@@ -17,9 +19,10 @@
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
 
-  (setq dashboard-items '((recents  . 100)
+  (setq dashboard-items '(
+			 ; (recents  . 0)
 			  (bookmarks . 50)
-			  (projects . 50)
+			  ;;(projects . 50)
 					;(agenda . 5)
 			  (registers . 50)))
   (setq dashboard-set-init-info t)
@@ -130,3 +133,16 @@
   )
 
 (leaf material-theme)
+
+(leaf sublime-themes
+  )
+
+(leaf  hybrid-reverse-theme)
+
+(leaf idea-darkula-theme)
+;;; load custom theme
+(setq  custom-theme-allow-multiple-selections nil)
+
+(setq menu-bar nil)
+
+(load-theme 'atom-one-dark)

@@ -2,7 +2,7 @@
 set relativenumber
 set number
 set number relativenumber
-
+set hlsearch
 set clipboard=unnamed,unamedplus
 set ignorecase
 set smartcase
@@ -12,6 +12,8 @@ set showcmd
 set showmode
 
 set sidescroll=10
+set NERDTree
+set ideajoin
 
 
 let mapleader = ","
@@ -19,7 +21,7 @@ let mapleader = ","
 
 set sneak
 set surround
-" set multiple-cursors
+set multiple-cursors
 set commentary
 "set ReplaceWithRegister
 "set argtextobj

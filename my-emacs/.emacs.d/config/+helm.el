@@ -33,9 +33,13 @@
   :config
 
 
+
+
   (setq helm-split-window-in-side-p t)
   (setq helm-window-prefer-horizontal-split t)
-					;(setq helm-display-buffer-reuse-frame t)
+(setq helm-display-function 'helm-default-display-buffer
+        helm-display-buffer-reuse-frame nil
+        helm-use-undecorated-frame-option nil)
 
   (setq helm-completion-style 'helm-fuzzy)
   (setq helm-M-x-fuzzy-match t)
@@ -63,7 +67,7 @@
   (helm-autoresize-mode)
   ( helm-popup-tip-mode )
   (leaf helm-icons
-    :custom (helm-icons-provider . 'all-the-icons)
+    :custom (helm-icons-provider . 'treemacs)
     :config
     (helm-icons-enable)
     )
@@ -100,5 +104,13 @@
 	   )
     :config
     (helm-projectile-on)
+    )
+  (leaf helm-wikipedia)
+
+  (leaf helm-posframe
+    :custom
+    :config
+    (setq helm-posframe-font "Noto Sans Mono")
+    (helm-posframe-enable)
     )
   )

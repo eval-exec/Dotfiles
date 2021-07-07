@@ -10,7 +10,7 @@
 						" " (icon 2 2   :left :elide)
 						" " (name 80 -1 :left :elide)
 						" " (size-h 10 -1 :left )
-						" " (mode+ 16 16 :left )
+						" " (mode+ 24 -1 :left )
 						" " (filename-and-process+ -1 -1 :left))))
 
     :config
@@ -43,14 +43,14 @@
   )
 
 
-(leaf persp-mode
-  :config
+;; (leaf persp-mode
+;;   :config
 
-  (setq wg-morph-on nil) ;; switch off animation
-  (setq persp-autokill-buffer-on-remove 'kill-weak)
+;;   (setq wg-morph-on nil) ;; switch off animation
+;;   (setq persp-autokill-buffer-on-remove 'kill-weak)
 
-  (add-hook 'window-setup-hook #'(lambda () (persp-mode 1)))
-  )
+;;   (add-hook 'window-setup-hook #'(lambda () (persp-mode 1)))
+;;   )
 
 
 

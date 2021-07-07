@@ -27,7 +27,6 @@
   :custom ((leaf-defaults . '(:ensure t))))
 
 ;; (leaf quelpa 
-;;   :ensure nil
 ;;   :config
 
 ;;   (quelpa
@@ -35,8 +34,9 @@
 ;;      :fetcher git
 ;;      :url "https://github.com/quelpa/quelpa-leaf.git"))
 ;;   (require 'quelpa-leaf)
-  (quelpa-leaf-init)
 ;;   )
+(quelpa-leaf-init)
+
 
 
 (setq inhibit-compacting-font-caches t)

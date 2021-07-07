@@ -117,6 +117,8 @@ font:
     # family: "MesloLGS NF"
 
     family: "Source Code Pro"
+    # family: "Fira Code"
+      #family: "Noto Sans Mono"
     # family: "Noto Sans Mono"
 
     # The `style` can be specified to pick a specific face.
@@ -163,7 +165,7 @@ font:
   # spacing.
   offset:
     x: 0
-    y: -4
+    y: -5
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the

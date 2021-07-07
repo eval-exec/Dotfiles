@@ -1,5 +1,5 @@
 (leaf flycheck
-  :global-minor-mode global-flycheck-mode
+  ;:global-minor-mode global-flycheck-mode
   :config
   (leaf flycheck-color-mode-line
 	:init
