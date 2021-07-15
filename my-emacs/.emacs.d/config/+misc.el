@@ -34,7 +34,7 @@
 ;;   )
 (leaf hl-line
   :config
- ; (global-hl-line-mode)
+  (global-hl-line-mode)
   )
 
 (leaf fcitx
@@ -215,6 +215,9 @@
 ;; 	 )))
 
 
+(leaf mermaid-mode)
 
+(leaf gnuplot)
 
 (leaf vimrc-mode)
+(setq debug-on-error nil)
