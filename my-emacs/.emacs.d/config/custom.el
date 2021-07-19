@@ -29,7 +29,7 @@
  '(company-tooltip-limit 20)
  '(company-transformers '(company-sort-prefer-same-case-prefix))
  '(confirm-kill-emacs 'yes-or-no-p)
- '(custom-enabled-themes '(atom-one-dark))
+ '(custom-enabled-themes '(doom-one))
  '(custom-safe-themes t)
  '(dashboard-week-agenda nil)
  '(deft-directory "~/org/" t)
@@ -113,7 +113,7 @@
  '(org-journal-time-format "%T")
  '(org-log-done 'time)
  '(org-return-follows-link t)
- '(org-roam-buffer-width 0.33)
+ '(org-roam-buffer-width 0.33 t)
  '(org-roam-capture-templates
    '(("d" "default" plain #'org-roam--capture-get-point "%?" :file-name "%(format-time-string \"${slug}__%Y-%m-%d-%H:%M:%S\")" :head "#+TITLE: ${title}
 #+CREATED: %U
@@ -127,8 +127,8 @@
       ("Tasks")
       :unnarrowed t :immediate-finish)))
  '(org-roam-completion-everywhere t)
- '(org-roam-completion-ignore-case t)
- '(org-roam-completion-system 'helm)
+ '(org-roam-completion-ignore-case t t)
+ '(org-roam-completion-system 'helm t)
  '(org-roam-dailies-capture-templates
    '(("d" "default" entry #'org-roam-capture--get-point "* %?" :file-name "Journal/%<%Y-%m-%d>" :head "#+TITLE: %<%Y-%m-%d %a>
 
@@ -175,13 +175,13 @@
 
 ")))
  '(org-roam-db-location "~/.cache/org-roam-db/roam.db")
- '(org-roam-db-update-method 'immediate)
+ '(org-roam-db-update-method 'immediate t)
  '(org-roam-directory "~/org/roam/")
- '(org-roam-file-completion-tag-position 'append)
- '(org-roam-graph-shorten-titles 'wrap)
- '(org-roam-include-type-in-ref-path-completions t)
+ '(org-roam-file-completion-tag-position 'append t)
+ '(org-roam-graph-shorten-titles 'wrap t)
+ '(org-roam-include-type-in-ref-path-completions t t)
  '(org-roam-protocol-store-links t t)
- '(org-roam-title-to-slug-function 'EXEC/org-roam--title-to-slug)
+ '(org-roam-title-to-slug-function 'EXEC/org-roam--title-to-slug t)
  '(org-startup-truncated nil)
  '(org-startup-with-inline-images t)
  '(org-tag-beautify-mode t t)

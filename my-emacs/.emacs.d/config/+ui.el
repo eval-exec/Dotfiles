@@ -24,7 +24,8 @@
 			  (bookmarks . 50)
 			  ;;(projects . 50)
 					;(agenda . 5)
-			  (registers . 50)))
+			 ; (registers . 50)
+			  ))
   (setq dashboard-set-init-info t)
   (dashboard-setup-startup-hook)
 
@@ -145,4 +146,4 @@
 
 (setq menu-bar nil)
 
-(load-theme 'atom-one-dark)
+(load-theme 'doom-acario-dark)

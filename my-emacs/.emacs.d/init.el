@@ -25,6 +25,8 @@
 ;; </leaf-install-code>
 (leaf leaf
   :custom ((leaf-defaults . '(:ensure t))))
+(setq org-roam-v2-ack t)
+
 
 ;; (leaf quelpa 
 ;;   :config

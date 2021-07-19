@@ -15,7 +15,7 @@
 (set-fontset-font "fontset-default" 'symbol "Symbola")
 (set-fontset-font "fontset-default" 'ascii "Source Code Pro")
 (set-fontset-font "fontset-default" 'latin "Source Code Pro")
-(set-fontset-font "fontset-default" 'unicode "Sarasa Mono SC Nerd")
+(set-fontset-font "fontset-default" 'unicode "")
  (set-fontset-font "fontset-default" 'cjk-misc "Sarasa Mono SC Nerd")
 
 (add-to-list 'face-font-rescale-alist '("Symbola" . 0.6))
