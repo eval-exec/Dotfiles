@@ -1,6 +1,9 @@
 ;;; package --- Summary
 ;;; Commentary:
 
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+
 ;;; Code:
 (eval-and-compile
   (customize-set-variable
@@ -30,13 +33,12 @@
 
 ;; (leaf quelpa 
 ;;   :config
-
 ;;   (quelpa
 ;;    '(quelpa-leaf
 ;;      :fetcher git
-;;      :url "https://github.com/quelpa/quelpa-leaf.git"))
-;;   (require 'quelpa-leaf)
-;;   )
+;;      :url "https://github.com/quelpa/quelpa-leaf.git")))
+
+(require 'quelpa-leaf)
 (quelpa-leaf-init)
 
 
@@ -93,3 +95,5 @@
 ;; 						   )
 ;; 	  )
 
+
+(server-start)

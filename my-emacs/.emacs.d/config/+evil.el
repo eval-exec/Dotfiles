@@ -15,21 +15,14 @@
   :hook(after-init-hook . evil-mode)
   :custom
   (evil-want-C-u-scroll . t)
-  (evil-undo-system . 'undo-tree)
+  (evil-want-C-i-jump . t)
+  (evil-undo-system . 'undo-redo)
   
   :config
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "SPC") nil)
   (define-key evil-motion-state-map (kbd "RET") nil)
   (define-key evil-motion-state-map (kbd "TAB") nil))
-
-
-
-
-
-
-
-
   (leaf evil-leader
     :after evil
     :global-minor-mode global-evil-leader-mode
@@ -110,6 +103,26 @@
     :config
     (evil-terminal-cursor-changer-activate) ; or (etcc-on)
     )
+
+  (evil-define-motion exec/sync-org-entry-to-tg(beg end)
+    :jump t
+    :repeat nil
+    (interactive "<r>")
+    (setq content (buffer-substring-no-properties
+		   (region-beginning)
+		   (region-end)))
+    (setq url-proxy-services '(("http" . "127.0.0.1:1081")
+			       ("https" . "127.0.0.1:1081"))) 
+    (url-retrieve-synchronously
+     (url-encode-url (format 
+		      "https://api.telegram.org/bot%s/sendMessage?chat_id=@%s&text=%s"
+		      (read-file "/home/vory/.emacs.d/config/tgsync.token")
+		      (read-file "/home/vory/.emacs.d/config/chatid.priv")
+		      (url-hexify-string content))))
+    (if (evil-visual-state-p)
+	(evil-exit-visual-state))
+    (message "sync to telegram channel success")
+    )
   )
 
 (leaf electric
@@ -119,3 +132,27 @@
 	 (prog-mode . electric-indent-mode)
 	 )
   )
+(defun read-file (filename)
+  (save-excursion
+    (let ((new (get-buffer-create filename)) (current (current-buffer)))
+      (switch-to-buffer new)
+      (insert-file-contents filename)
+      (mark-whole-buffer)
+      (let ((contents (buffer-substring (mark) (point))))
+	(kill-buffer new)
+	(switch-to-buffer current)
+	contents))))
+
+
+
+
+
+
+;; (define-minor-mode evil-visualstar-mode
+;;   "Minor mode for visual star selection."
+;;   :keymap (let ((map (make-sparse-keymap)))
+;; 	    (evil-define-key 'visual map (kbd "<f8>") #'exec/sync-org-entry-to-tg)
+;; 	    map)
+;;   (evil-normalize-keymaps))
+;; 
+;; (evil-visualstar-mode t)

@@ -1,4 +1,5 @@
 my-emacs/.emacs.d/*
+my-emacs/.emacs.d/config/tgsync.token
 !my-emacs/.emacs.d/init.el
 !my-emacs/.emacs.d/config
 nasyxx

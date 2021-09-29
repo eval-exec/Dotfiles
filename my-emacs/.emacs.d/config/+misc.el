@@ -112,6 +112,7 @@
   :global-minor-mode winner-mode
   )
 (leaf pangu-spacing
+  :disabled nil
   :custom
   (pangu-spacing-real-insert-separtor . t)
   :global-minor-mode global-pangu-spacing-mode
@@ -148,6 +149,7 @@
   :global-minor-mode save-place-mode)
 
 (leaf atomic-chrome
+  :disabled t
   :hook (after-init-hook . atomic-chrome-start-server)
   :config
   (setq atomic-chrome-enable-auto-update nil)
@@ -168,10 +170,10 @@
   )
 
 (defun toggle-display-line-numbers() 
-(setq display-line-numbers 'visual)
-(setq display-line-numbers-type 'visual)
+  (setq display-line-numbers 'visual)
+  (setq display-line-numbers-type 'visual)
   (setq on +1)
-  ;(interactive)
+					;(interactive)
   (if (bound-and-true-p display-line-numbers-mode) (setq on -1))
   (display-line-numbers-mode on)
   )
@@ -192,7 +194,7 @@
 
 (leaf pdf-tools
   :config
-  ;(pdf-loader-install)
+					;(pdf-loader-install)
   )
 
 
@@ -200,19 +202,20 @@
   :custom
   (use-proxy-http-proxy . "127.0.0.1:1081")
   (use-proxy-https-proxy . "127.0.0.1:1081")
- (use-proxy-display-in-global-mode-string . nil)
+  (use-proxy-display-in-global-mode-string . nil)
   :config
   (use-proxy-mode)
   )
 
 (leaf telega
+  :disabled t
   :config
-
+  (setq telega-animation-play-inline nil)
+  (setq telega-chat-show-avatars t)
   (setq telega-proxies
 	(list
 	 '(:server "127.0.0.1" :port 1080 :enable t
-		   :type (:@type "proxyTypeSocks5"))
-	 )))
+		   :type (:@type "proxyTypeSocks5")))))
 
 
 (leaf mermaid-mode)
@@ -221,3 +224,7 @@
 
 (leaf vimrc-mode)
 (setq debug-on-error nil)
+
+
+(leaf elisp-format
+  :disabled t)

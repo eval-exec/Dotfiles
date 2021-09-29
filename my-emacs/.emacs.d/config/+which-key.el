@@ -12,16 +12,16 @@
   (setq which-key-max-description-length nil)
   (setq which-key-side-window-max-height 0.5)
 
-										;(setq which-key-sort-order 'which-key-key-order)
+					;(setq which-key-sort-order 'which-key-key-order)
   (setq which-key-sort-order 'which-key-prefix-then-key-order)
   ;; (setq which-key-sort-order 'which-key-local-then-key-order)
 
-										; (add-to-list 'which-key-replacement-alist '(("TAB" . nil) . ("↹" . nil)))
-										; (add-to-list 'which-key-replacement-alist '(("RET" . nil) . ("⏎" . nil)))
-										; (add-to-list 'which-key-replacement-alist '(("DEL" . nil) . ("⇤" . nil)))
-										; (add-to-list 'which-key-replacement-alist '(("SPC" . nil) . ("␣" . nil)))
+					; (add-to-list 'which-key-replacement-alist '(("TAB" . nil) . ("↹" . nil)))
+					; (add-to-list 'which-key-replacement-alist '(("RET" . nil) . ("⏎" . nil)))
+					; (add-to-list 'which-key-replacement-alist '(("DEL" . nil) . ("⇤" . nil)))
+					; (add-to-list 'which-key-replacement-alist '(("SPC" . nil) . ("␣" . nil)))
 
-										;  (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL"))
+					;  (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL"))
 
   ;;   (which-key-add-key-based-replacements
   ;;     "SPC b" "buffer"
@@ -36,27 +36,29 @@
   ;;     )
 
 
-
-  (leaf which-key-posframe
-    :config
-    (setq which-key-posframe-poshandler 'posframe-poshandler-frame-center)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-center)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-left-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-right-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-left-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-right-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-window-center)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-window-top-left-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-window-top-right-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-window-bottom-left-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-window-bottom-right-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-point-top-left-corner)
-    (setq which-key-posframe-poshandler 'posframe-poshandler-point-bottom-left-corner)
-
-
-    (setq which-key-posframe-font "Noto Sans Mono")
-    (which-key-posframe-mode)
-    )
-
   :global-minor-mode which-key-mode
+  )
+
+
+(leaf which-key-posframe
+  :disabled nil
+  :config
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-center)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-center)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-left-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-right-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-left-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-right-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-window-center)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-window-top-left-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-window-top-right-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-window-bottom-left-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-window-bottom-right-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-point-top-left-corner)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-point-bottom-left-corner)
+
+
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-center)
+  (setq which-key-posframe-font "Noto Sans Mono")
+  :global-minor-mode which-key-posframe-mode
   )

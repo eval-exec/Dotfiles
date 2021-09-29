@@ -116,11 +116,12 @@ font:
     # family: unifont
     # family: "MesloLGS NF"
 
-    family: "Source Code Pro"
+    # family: "Source Code Pro"
     # family: "Fira Code"
-      #family: "Noto Sans Mono"
-    # family: "Noto Sans Mono"
+      # family: "Sarasa Mono SC Nerd"
 
+    # family: "MesloLGS NF"
+    family: "Noto Sans Mono"
     # The `style` can be specified to pick a specific face.
     style: Regular
 
@@ -165,7 +166,7 @@ font:
   # spacing.
   offset:
     x: 0
-    y: -5
+    y: -8
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -193,7 +194,7 @@ colors:
     foreground: '0xffffff'
   cursor:
     text: '0xffffff'
-    cursor: '0x000000'
+    #    cursor: '0x000000'
 
   # Normal colors
   normal:
@@ -410,7 +411,7 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Block
+    # shape: Block
 
     # Cursor blinking state
     #
@@ -430,7 +431,7 @@ cursor:
   #vi_mode_style: None
 
   # Cursor blinking interval in milliseconds.
-  blink_interval: 80
+  blink_interval: 70
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -478,7 +479,6 @@ mouse:
 
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: true
-
     # url:
     # URL launcher
     #

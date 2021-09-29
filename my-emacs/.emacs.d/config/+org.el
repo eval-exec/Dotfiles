@@ -97,7 +97,7 @@
 ;;;;;;; org-agenda-begin
   (org-log-done .  'time)
   (org-agenda-files . '("~/org" "~/org/work" "~/org/personal" "~/org/journal" "~/org/notes"))
-  (org-agenda-include-diary . t)
+  ;(org-agenda-include-diary . t)
 
   (org-agenda-time-grid . '((daily today require-timed) (000 100 200 300 400 500 600 700 800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300 2400) "......" "----------------"))
   (org-agenda-use-tag-inheritance . t)
@@ -167,131 +167,20 @@
     :after (org)
     :hook (org-mode-hook . org-appear-mode)
     )
-)
-
-
-
-
-
-
-(leaf org-roam
-  :hook	 (after-init-hook . org-roam-mode)
-  :bind (
-	 (:org-roam-mode-map
-	  ("C-c o r l" . org-roam)
-	  ("C-c o r f f" . org-roam-find-file)
-
-	  ("C-c o r d"   . org-roam-dailies-find-date)
-	  ("C-c o r c"   . org-roam-dailies-capture-today)
-	  ("C-c o r C r" . org-roam-dailies-capture-tomorrow)
-	  ("C-c o r f t"   . org-roam-dailies-find-today)
-	  ("C-c o r f y"   . org-roam-dailies-find-yesterday)
-	  ("C-c o r f r"   . org-roam-dailies-find-tomorrow)
-	  ("C-c o r g" . org-roam-graph)
-	  )
-
-	 (:org-mode-map
-	  ("C-c o r i" . org-roam-insert)
-	  ("C-c o r I" . org-roam-insert-immediate))
-	 )
-
-  :custom
-
-  (org-roam-buffer-width . 0.33)
-
-  (org-roam-completion-everywhere . t)
-  (org-roam-completion-ignore-case . t)
-  (org-roam-completion-system . 'helm)
-  (org-roam-include-type-in-ref-path-completions . nil)
-
-  (org-roam-db-location . "~/.cache/org-roam-db/roam.db")
-  (org-roam-db-update-method . 'immediate)
-  (org-roam-directory . "~/org/roam/")
-
-  (org-roam-file-completion-tag-position . 'append)
-  (org-roam-graph-shorten-titles . 'wrap)
-  (org-roam-include-type-in-ref-path-completions . t)
-  (org-roam-protocol-store-links . t)
-  (org-roam-title-to-slug-function . 'EXEC/org-roam--title-to-slug)
-
-  (org-roam-capture-templates . '(
-				("d" "default" plain (function org-roam--capture-get-point)
-				 "%?"
-				 :file-name "%(format-time-string \"${slug}__%Y-%m-%d-%H:%M:%S\")"
-				 :head "#+TITLE: ${title}\n#+CREATED: %U\n#+LAST_MODIFIED: %U\n#+ROAM_TAGS: \n"
-				 :unnarrowed t)
-				("ll" "link note" plain
-				 #'org-roam-capture--get-point
-				 "* %^{Link}"
-				 :file-name "Inbox"
-				 :olp ("Links")
-				 :unnarrowed t
-				 :immediate-finish)
-				("lt" "link task" entry
-				 #'org-roam-capture--get-point
-				 "* TODO %^{Link}"
-				 :file-name "Inbox"
-				 :olp ("Tasks")
-				 :unnarrowed t
-				 :immediate-finish)
-				)
-			      )
-
-  ;;(org-roam-dailies-directory "Journal/")
-  (org-roam-dailies-capture-templates .   '(("d" "default" entry
-					 #'org-roam-capture--get-point
-					 "* %?"
-					 :file-name "Journal/%<%Y-%m-%d>"
-					 :head "#+TITLE: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-					("t" "Task" entry
-					 #'org-roam-capture--get-point
-					 "* TODO %?\n  %U\n  %a\n  %i"
-					 :file-name "Journal/%<%Y-%m-%d>"
-					 :olp ("Tasks")
-					 :empty-lines 1
-					 :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-					("j" "journal" entry
-					 #'org-roam-capture--get-point
-					 "* %<%I:%M %p> - Journal  :journal:\n\n%?\n\n"
-					 :file-name "Journal/%<%Y-%m-%d>"
-					 :olp ("Log")
-					 :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-					("l" "log entry" entry
-					 #'org-roam-capture--get-point
-					 "* %<%I:%M %p> - %?"
-					 :file-name "Journal/%<%Y-%m-%d>"
-					 :olp ("Log")
-					 :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
-					("m" "meeting" entry
-					 #'org-roam-capture--get-point
-					 "* %<%I:%M %p> - %^{Meeting Title}  :meetings:\n\n%?\n\n"
-					 :file-name "Journal/%<%Y-%m-%d>"
-					 :olp ("Log")
-					 :head "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")))
-  :config
-  ;;; org-roam-server
-  (leaf org-roam-server
-    :custom
-    (org-roam-server-host . "127.0.0.1")
-    (org-roam-server-port . 3333 )
-    (org-roam-server-authenticate . nil )
-    (org-roam-server-export-inline-images . t )
-    (org-roam-server-serve-files . nil )
-    (org-roam-server-served-file-extensions . '("pdf" "mp4" "ogv" "org") )
-    (org-roam-server-network-poll . t )
-    (org-roam-server-network-arrows . nil )
-    (org-roam-server-network-label-truncate . t )
-    (org-roam-server-network-label-truncate-length . 60 )
-    (org-roam-server-network-label-wrap-length . 20)
-    ;;:global-minor-mode org-roam-server-mode
-    )
   )
+
+
+
+
+
+
 
 
 (leaf org-journal
   :bind
   (
    ("C-c o j" . org-journal-new-entry)
+					;("C-c o j p" . exec/sync-org-entry-to-tg)
    )
   :custom
   (org-journal-dir . "~/org/journal/")
@@ -366,4 +255,59 @@ With a prefix ARG, remove start location."
 	 ("C-c d d" . deft)
 	 ("C-c d f" . deft-find-file)
 	 )
+  )
+
+
+(leaf org-roam
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture))
+  :config
+
+  ;; (setq org-roam-mode-section-functions
+  ;; 	(list #'org-roam-backlinks-section
+  ;; 	      #'org-roam-reflinks-section
+  ;; 	      #'org-roam-unlinked-references-section
+  ;; 	      #'org-roam-preview-section
+  ;; 	      #'org-roam-node-section
+  ;; 	      #'org-roam-grep-section
+  ;; 	      ))
+
+  (setq org-roam-capture-templates
+	'(("d" "default" plain "%?" :if-new
+	   (file+head
+	    "${slug}-%<%Y%m%d%H%M%S>.org"
+	    "#+TITLE: ${title}
+#+FILETAGS: 
+#+CREATED_AT: %u
+#+LAST_MODIFIED: <>
+")
+	   :unnarrowed t)))
+  
+
+
+
+  (add-to-list 'display-buffer-alist
+               '("\\*org-roam\\*"
+		 (display-buffer-in-side-window)
+		 (side . right)
+		 (slot . 0)
+		 (window-width . 0.34)
+		 (window-parameters . ((no-other-window . t)
+                                       (no-delete-other-windows . t)))))
+
+
+
+  (setq org-roam-completion-everywhere t)
+
+
+  (setq org-roam-directory (file-truename "~/org-roam"))
+  (org-roam-setup))
+
+(leaf org-download
+  :hook (org-mode-hook . org-download-enable)
+  :config
+  (setq-default org-download-image-dir "~/Pictures/org/")
   )
