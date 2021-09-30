@@ -3,6 +3,7 @@
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
+(setq make-backup-files nil)
 
 ;;; Code:
 (eval-and-compile
@@ -41,12 +42,9 @@
 (require 'quelpa-leaf)
 (quelpa-leaf-init)
 
-
-
 (setq inhibit-compacting-font-caches t)
 
 (leaf gcmh
-
   :custom
   (gcmh-high-cons-threshold . 10737418240)
   (gcmh-idle-delay . 60)
@@ -56,14 +54,12 @@
   )
 
 (set-default-coding-systems 'utf-8)
-(leaf exec-path-from-shell
-  :config
-
-  (setenv   "GOPATH" "/home/vory/go")
-  (setenv "GOBIN" "/home/vory/go/bin")
-  (setenv "GO111MODULE" "auto")
-
-  ( exec-path-from-shell-initialize))
+;; (leaf exec-path-from-shell
+;;   :config
+;;   (setenv  "GOPATH" "/home/vory/go")
+;;   (setenv "GOBIN" "/home/vory/go/bin")
+;;   (setenv "GO111MODULE" "auto")
+;;   ( exec-path-from-shell-initialize))
 
 (leaf leaf-tree :ensure t)
 (leaf leaf-convert :ensure t)
@@ -82,18 +78,4 @@
 
 (setq custom-file "~/.emacs.d/config/custom.el")
 (load custom-file)
-(load "~/.emacs.d/load-directory")
-(load-file "~/.emacs.d/config/+evil.el")
-(load-directory "~/.emacs.d/config")
-
-
-
-;; (setq url-proxy-services '(
-;; 						   ("no_proxy" . "^\\(*.tsinghua.*\\)")
-;; 						   ("http" . "http://127.0.0.1:1081")
-;; 						   ("https" . "http://127.0.0.1:1081")
-;; 						   )
-;; 	  )
-
-
-(server-start)
+(load "~/.emacs.d/config/config.el")

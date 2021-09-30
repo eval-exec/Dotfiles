@@ -1,4 +1,0 @@
-(leaf go-mode
-  :config
-
-  )
