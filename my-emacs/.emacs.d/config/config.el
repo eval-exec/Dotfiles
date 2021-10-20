@@ -1,3 +1,19 @@
+(setq my-font "Sarasa Mono SC Nerd")
+(setq posframe-mouse-banish nil)
+
+(setenv "PATH" (concat (getenv "PATH") ":/home/vory/.local/bin"))
+(setq exec-path (append exec-path '("/home/vory/.local/bin")))
+
+
+(setenv "PATH" (concat (getenv "PATH") ":/home/vory/go/bin"))
+
+(setq exec-path (append exec-path '("/home/vory/go/bin")))
+
+(setenv "GO111MODULE" "on")
+(setenv "GOBIN" "/home/vory/go/bin")
+(setenv "GOPATH" "/home/vory/go")
+(setenv "GOROOT" "/usr/lib/go")
+
 (leaf avy
   :bind
   (
@@ -13,7 +29,7 @@
   :tag "builtin"
   :hook (
 	 (after-init-hook . electric-pair-mode)
-	 (prog-mode . electric-indent-mode)
+	 (prog-mode-hook . electric-indent-mode)
 	 )
   )
 (defun read-file (filename)
@@ -102,15 +118,15 @@
       (message filename))))
 
 (leaf general
-  :config
-  (general-define-key
-   :state 'normal
-   "C-S-c" 'exec/put-file-name-on-clipboard)
-  )
-(leaf go-mode
+  :custom
   :config
 
+  (general-define-key
+   :state 'normal
+   "C-S-c" 'exec/put-file-name-on-clipboard
+   )
   )
+
 (leaf helm 
   :bind (("M-x" . helm-M-x) 
 	 ("C-j" . helm-next-line) 
@@ -153,15 +169,6 @@
 	helm-use-undecorated-frame-option nil)
   (setq helm-completion-style 'helm-fuzzy) 
   (setq helm-M-x-fuzzy-match t)
-  ;; helm-apropos-fuzzy-match t
-  ;; helm-buffers-fuzzy-matching t
-  ;; helm-locate-fuzzy-match t
-  ;; helm-etags-fuzzy-match t
-  ;; helm-imenu-fuzzy-match    t
-  ;; helm-lisp-fuzzy-completion t
-  ;; helm-session-fuzzy-match t
-  ;; helm-recentf-fuzzy-match    t
-  ;; helm-semantic-fuzzy-match t
   (setq helm-mode-fuzzy-match t) 
   (setq helm-completion-in-region-fuzzy-match t)
   (setq helm-M-x-always-save-history t) 
@@ -201,16 +208,22 @@
     :config (helm-projectile-on)) 
   (leaf helm-wikipedia)
   (leaf helm-posframe 
-    :disabled nil 
+    :disabled nil
     :custom 
-    :config (setq helm-posframe-font "Noto Sans Mono") 
-    (helm-posframe-enable)))
+    :config
+    (setq helm-posframe-font my-font)
+    (setq helm-posframe-poshandler 'posframe-poshandler-frame-bottom-center)
+    (setq helm-posframe-border-width 1)
+    (setq helm-posframe-min-width (window-total-width))
+    (helm-posframe-enable)
+    )
 
-(leaf helm-ag
-  :custom
-  (helm-follow-mode-persistent . t)
-  (helm-ag-base-command . "rg")
-  (helm-ag-success-exit-status . '(0 2))
+  (leaf helm-ag
+    :custom
+    (helm-follow-mode-persistent . t)
+    (helm-ag-base-command . "rg")
+    (helm-ag-success-exit-status . '(0 2))
+    )
   )
 (leaf ibuffer
   :bind
@@ -301,13 +314,13 @@
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-	 (c++-mode . lsp)
-	 (sh-mode . lsp)
-	 (lsp-mode . lsp-len-mode)
-	 (c-mode . lsp)
-	 (go-mode . lsp)
-	 (python-mode . lsp)
-	 (lsp-mode . lsp-enable-which-key-integration)
+	 (c++-mode-hook . lsp)
+	 (sh-mode-hook . lsp)
+	 (lsp-mode-hook . lsp-len-mode)
+	 (c-mode-hook . lsp)
+	 (go-mode-hook . #'lsp-deferred)
+	 (python-mode-hook . lsp)
+	 (lsp-mode-hook . lsp-enable-which-key-integration)
 	 )
 
   :custom
@@ -317,9 +330,30 @@
   (lsp-enable-snippet . t)
   :commands lsp
   :config
-  (setq lsp-clients-python-command "/home/vory/.local/bin/jedi")
   (setq gc-cons-threshold 100000000)
   (setq read-process-output-max (* 2024 2024)) ;; 1mb
+
+  (leaf go-mode
+    :hook (
+	   (before-save-hook . #'lsp-format-buffer)
+	   (before-save-hook . #'lsp-organize-imports))
+    :config
+
+
+    (leaf go-expr-completion
+      :bind("C-c C-c" . go-expr-completion))
+    (leaf go-gen-test)
+    (leaf go-impl)
+    (leaf go-fill-struct)
+    (leaf go-rename)
+    (leaf go-tag)
+
+    
+    )
+
+
+  
+
   (leaf lsp-ui
     :commands lsp-ui-mode
     :hook (lsp-mode . lsp-ui-mode)
@@ -396,7 +430,8 @@
   )
 
 (leaf rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :hook ((prog-mode-hook emacs-lisp-mode-hook) .  rainbow-delimiters-mode)
+  )
 
 (leaf calendar
   :config
@@ -432,15 +467,6 @@
 (leaf hl-line
   :config
   (global-hl-line-mode)
-  )
-
-(leaf fcitx
-  :after evil
-  
-  :custom
-  (fcitx-remote-command . "/usr/bin/fcitx5-remote")
-  :config
-  (fcitx-aggressive-setup)
   )
 
 (leaf helpful
@@ -518,27 +544,26 @@
 (setq confirm-kill-emacs 'yes-or-no-p)
 (tool-bar-mode -1)
 
-(defun google-translate--search-tkk () "Search TKK." (list 430675 2721866130))
 (leaf google-translate
-  :config
   :custom
-  (
-   (google-translate-default-source-language . "en")
-   (google-translate-default-target-language . "zh-CN")
-
-   (google-translate--tkk-url . "https://translate.google.cn/")
-   (google-translate-base-url . "https://translate.google.cn/translate_a/single")
-   (google-translate-listen-url . "https://translate.google.cn/translate_tts")
-   (google-translate-backend-method  . 'curl)
-   (google-translate-output-destination . 'echo-area)
-
-
-   (google-translate-translation-directions-alist .    '(("en" . "zh-CN") ("zh-CN" . "en") ))
-   )
   :bind(
 	("C-c t t" . google-translate-at-point)
 	("C-c t s" . google-translate-smooth-translate)
 	)
+  :config
+  (defun google-translate--search-tkk@fix () "Search TKK." (list 430675 2721866130))
+  (advice-add 'google-translate--search-tkk :override 'google-translate--search-tkk@fix)
+  (setq google-translate-default-source-language  "en")
+  (setq google-translate-default-target-language  "zh-CN")
+
+  (setq google-translate--tkk-url  "https://translate.google.cn/")
+  (setq google-translate-base-url  "https://translate.google.cn/translate_a/single")
+  (setq google-translate-listen-url  "https://translate.google.cn/translate_tts")
+  (setq google-translate-backend-method   'curl)
+  (setq google-translate-output-destination  'echo-area)
+
+
+  (setq google-translate-translation-directions-alist     '(("en" . "zh-CN") ("zh-CN" . "en") ))
   )
 (leaf recentf
   :tag "builtin"
@@ -658,13 +683,13 @@
 (defun EXEC/org-roam--title-to-slug (title)
   "Convert TITLE to a filename-suitable slug."
   (cl-flet* ((nonspacing-mark-p (char)
-				(memq char org-roam-slug-trim-chars))
+	       (memq char org-roam-slug-trim-chars))
 	     (strip-nonspacing-marks (s)
-				     (ucs-normalize-NFC-string
-				      (apply #'string (seq-remove #'nonspacing-mark-p
-								  (ucs-normalize-NFD-string s)))))
+	       (ucs-normalize-NFC-string
+		(apply #'string (seq-remove #'nonspacing-mark-p
+					    (ucs-normalize-NFD-string s)))))
 	     (cl-replace (title pair)
-			 (replace-regexp-in-string (car pair) (cdr pair) title)))
+	       (replace-regexp-in-string (car pair) (cdr pair) title)))
     (let* ((pairs `(("[^[:alnum:][:digit:]]" . "_")  ;; convert anything not alphanumeric
 		    ("__*" . "_")  ;; remove sequential underscores
 		    ("^_" . "")  ;; remove starting underscore
@@ -802,6 +827,11 @@
     :after (org)
     :hook (org-mode-hook . org-appear-mode)
     )
+
+
+  (leaf ob-go
+    )
+  (leaf ob-rust)
   )
 
 
@@ -834,18 +864,22 @@
 
 
 (leaf org-download
+  :after org
   )
 
 
 
 (leaf org-pdftools
+  :after org
   :hook (org-mode . org-pdftools-setup-link))
 (leaf org-noter
+  :after org
   :config
   ;; Your org-noter config ........
 
 
   (leaf org-noter-pdftools
+    :after org
     :config
     ;; Add a function to ensure precise note is inserted
     (defun org-noter-pdftools-insert-precise-note (&optional toggle-no-questions)
@@ -881,6 +915,7 @@ With a prefix ARG, remove start location."
 
 
 (leaf deft
+  :after org
   :custom
   (deft-extensions . '("txt" "org" "md"))
   (deft-directory . "~/org/")
@@ -970,10 +1005,15 @@ With a prefix ARG, remove start location."
 
   )
 (leaf yasnippet
+  :bind (
+	 ("H-i" . yas-insert-snippet)
+	 ("H-e" . yas-expand)
+	 )
+
   :config
   (leaf yasnippet-snippets
+    :global-minor-mode  yas-global-mode
     )
-  :global-minor-mode  yas-global-mode
   )
 
 (leaf treemacs
@@ -1055,7 +1095,7 @@ With a prefix ARG, remove start location."
 
 (leaf treemacs-evil
   :after (treemacs evil)
-  :ensure t)
+  )
 
 
 
@@ -1209,9 +1249,7 @@ With a prefix ARG, remove start location."
 
 (leaf atom-one-dark-theme)
 (leaf github-theme)
-(leaf almost-mono-themes
-  :config
-  )
+(leaf almost-mono-themes)
 
 
 ;; (leaf nebula-theme
@@ -1307,33 +1345,25 @@ With a prefix ARG, remove start location."
 
 
 (leaf which-key-posframe
-  :disabled nil
+  :disabled t
   :config
-  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-center)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-center)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-left-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-top-right-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-left-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-right-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-window-center)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-window-top-left-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-window-top-right-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-window-bottom-left-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-window-bottom-right-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-point-top-left-corner)
-  (setq which-key-posframe-poshandler 'posframe-poshandler-point-bottom-left-corner)
-
-
-  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-center)
-  (setq which-key-posframe-font "Noto Sans Mono")
+  (setq which-key-posframe-font my-font)
+  (defun exec/posframe-arghandler (buffer-or-name arg-name value)
+    (let ((info '(:internal-border-width 1 :width (window-total-width) )))
+      (or (plist-get info arg-name) value)))
+  (setq posframe-arghandler #'exec/posframe-arghandler)
+  (setq which-key-posframe-poshandler 'posframe-poshandler-frame-bottom-center)
+  (setq which-key-posframe-border-width 0)
   :global-minor-mode which-key-posframe-mode
   )
 
 
 (leaf evil
   :init
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
+  (setq evil-want-C-i-jump nil)
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-C-u-scroll t)
   :bind(
 	(:evil-insert-state-map
 	 (
@@ -1346,38 +1376,11 @@ With a prefix ARG, remove start location."
 	)
   :hook(after-init-hook . evil-mode)
   :custom
-  (evil-want-C-u-scroll . t)
-  (evil-want-C-i-jump . t)
   (evil-undo-system . 'undo-redo)
   
   :config
-  (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "SPC") nil)
-    (define-key evil-motion-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "TAB") nil))
-  (leaf evil-leader
-    :after evil
-    :global-minor-mode global-evil-leader-mode
-    :config
-    (evil-leader/set-key
-      "e" 'find-file
-      "b" 'ibuffer
-      "k" 'kill-this-buffer)
-    (evil-leader/set-key
-      "ci" 'evilnc-comment-or-uncomment-lines
-      "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
-      "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
-      "cc" 'evilnc-copy-and-comment-lines
-      "cp" 'evilnc-comment-or-uncomment-paragraphs
-      "cr" 'comment-or-uncomment-region
-      "cv" 'evilnc-toggle-invert-comment-line-by-line
-      "."  'evilnc-copy-and-comment-operator
-      "\\" 'evilnc-comment-operator ; if you prefer backslash key
-      )
-
-
-
-    )
+  (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+  (evil-define-key 'normal org-mode-map (kbd "RET") #'org-return)
   (leaf evil-collection
     :after evil
     :config
@@ -1388,9 +1391,10 @@ With a prefix ARG, remove start location."
   (setq evil-want-keybinding t)
   (leaf fcitx
     :after evil
-    :config
-    (setq fcitx-remote-command "/usr/bin/fcits5-remote")
-    (fcitx-evil-turn-on)
+    :config 
+    (setq fcitx-remote-command "/usr/bin/fcitx5-remote")
+    (fcitx-aggressive-setup)
+    (setq fcitx-use-dbus nil)
     )
   (leaf evil-exchange
     :after evil
@@ -1454,10 +1458,83 @@ With a prefix ARG, remove start location."
     (if (evil-visual-state-p)
 	(evil-exit-visual-state))
     (message "sync to telegram channel success")
+
+
+
+    (leaf fcitx
+      :init (setq fcitx-remote-command  "/usr/bin/fcitx5-remote")
+      :after evil
+      :config
+      (fcitx-aggressive-setup)
+      )
     ))
 
 (leaf olivetti
   :config
-  (olivetti-set-width 122)
   )
-(load-theme 'atom-one-dark)
+
+(leaf highlight-defined
+  :config
+  :hook (emacs-lisp-mode-hook . highlight-defined-mode)
+  )
+
+(setq dired-listing-switches "-alFh")
+(leaf dired-hacks-utils
+  :global-minor-mode dired-utils-format-information-line-mode)
+(leaf dired-filter)
+(leaf dired-open)
+
+(leaf diredfl
+  :global-minor-mode diredfl-global-mode
+  )
+
+(leaf dired-subtree)
+(leaf dired-ranger)
+(leaf dired-narrow)
+(leaf dired-collapse
+  :global-minor-mode dired-collapse-mode
+  )
+
+(leaf expand-region
+  :bind ("C-=" . er/expand-region))
+
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(leaf sly
+  :config
+  (leaf helm-sly)
+  )
+(defun exec/screenshot-svg ()
+  "Save a screenshot of the current frame as an SVG image.
+Saves to a temp file and puts the filename in the kill ring."
+  (interactive)
+  (let* ((filename (make-temp-file "Emacs" nil ".svg"))
+	 (data (x-export-frames nil 'svg)))
+    (with-temp-file filename
+      (insert data))
+    (kill-new filename)
+    (message filename)))
+
+(leaf danneskjold-theme)
+(leaf modus-themes)
+(leaf flatui-theme)
+(leaf twilight-bright-theme )
+
+(leaf bm
+  :config
+  (leaf helm-bm
+    )
+  )
+(leaf sqlup-mode)
+
+(set-frame-font my-font)
+
+
+;; (setq face-font-rescale-alist '(("Sarasa Mono SC Nerd" . 1)))
+;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;   (set-fontset-font (frame-parameter nil 'font)
+;; 		    charset
+;; 		    (font-spec :family "Sarasa Mono SC Nerd")))
+(leaf spacemacs-theme)
+(load-theme 'doom-vibrant)
+					;(load-theme 'modus-vivendi)
+
