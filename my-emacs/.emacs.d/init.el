@@ -1,3 +1,16 @@
+(setenv "PATH" "/home/vory/.nvm/versions/node/v14.0.0/bin:/home/vory/.local/bin:/home/vory/go/bin:/home/vory/.cargo/bin:/home/vory/bin:/usr/local/bin:/home/vory/.nvm/versions/node/v14.0.0/bin:/home/vory/.local/bin:/home/vory/go/bin:/home/vory/.cargo/bin:/home/vory/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/var/lib/flatpak/exports/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/jvm/default/bin")
+(setenv "GOPATH" "/home/vory/go")
+(setenv "GOROOT" "/usr/lib/go")
+(setenv "GOBIN" "/home/vory/go/bin")
+(setenv "GO111MODULE" "on")
+(setenv "LANG" "en_US.UTF-8")
+(setenv "LC_ALL" "en_US.UTF-8")
+(setenv "GOARCH" "amd64")
+(add-to-list 'exec-path "/home/vory/go/bin")
+(add-to-list 'exec-path "/home/vory/.cargo/bin")
+(add-to-list 'exec-path "/home/vory/.local/bin")
+
+
 ;;; package --- Summary
 ;;; Commentary:
 
@@ -9,11 +22,15 @@
 (eval-and-compile
   (customize-set-variable
    'package-archives
-
-   '(("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+   '(
+     ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
      ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-     ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/"))
+     ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
 
+     ;; ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+     ;; ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+     ;; ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+     )
    )
 
   (package-initialize)
@@ -30,15 +47,10 @@
 (leaf leaf
   :custom ((leaf-defaults . '(:ensure t))))
 (setq org-roam-v2-ack t)
-
-
-;; (leaf quelpa 
-;;   :config
-;;   (quelpa
-;;    '(quelpa-leaf
-;;      :fetcher git
-;;      :url "https://github.com/quelpa/quelpa-leaf.git")))
-
+;; (quelpa
+;;  '(quelpa-leaf
+;;    :fetcher git
+;;    :url "https://github.com/quelpa/quelpa-leaf.git"))
 (require 'quelpa-leaf)
 (quelpa-leaf-init)
 
@@ -54,12 +66,6 @@
   )
 
 (set-default-coding-systems 'utf-8)
-;; (leaf exec-path-from-shell
-;;   :config
-;;   (setenv  "GOPATH" "/home/vory/go")
-;;   (setenv "GOBIN" "/home/vory/go/bin")
-;;   (setenv "GO111MODULE" "auto")
-;;   ( exec-path-from-shell-initialize))
 
 (leaf leaf-tree :ensure t)
 (leaf leaf-convert :ensure t)
