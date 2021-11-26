@@ -47,10 +47,40 @@ inoremap <C-l> <Right>
 
 nnoremap <C-h> gT
 nnoremap <C-l> gt
+
+nnoremap <C-i>    :action Forward<CR>
+nnoremap <C-o>    :action Back<CR>
+
+
 nnoremap gd :action GotoDeclaration<CR>
+nnoremap gt :action GotoTypeDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 
+nnoremap g[ :action EditorCodeBlockStart<CR>
+nnoremap g] :action EditorCodeBlockEnd<CR>
+
+nnoremap g,    :action JumpToNextChange<CR>
+vnoremap g,    :action JumpToNextChange<CR>
+
+nnoremap g;    :action JumpToLastChange<CR>
+vnoremap g;    :action JumpToLastChange<CR>
+
+nnoremap zr    :action ExpandAllRegions<CR>
+vnoremap zr    :action ExpandAllRegions<CR>
+
+nnoremap zm    :action CollapseAllRegions<CR>
+vnoremap zm    :action CollapseAllRegions<CR>
+
+nnoremap zO    :action ExpandRegionRecursively<CR>
+vnoremap zO    :action ExpandRegionRecursively<CR>
+
+
+nnoremap <A-X>     :action GotoAction<CR>
+vnoremap <A-X>     :action GotoAction<CR>
+inoremap <A-X>     :action GotoAction<CR>
 nmap <leader>n :NERDTreeFocus<CR>
+nmap <A-X>     :action GotoAction<CR>
+nmap <A-X>     :action GotoAction<CR>
 nmap <leader>e :action SearchEverywhere<CR>
 nmap <leader>t :action GotoClass<CR>
 nmap <leader>f :action GotoFile<CR>
@@ -63,3 +93,32 @@ nmap <a-k>     :action MethodUp<CR>
 nmap <C-S-j>   :action AceTargetAction<CR>
 
 nmap <leader>p :action ActivateProblemsViewToolWindow<CR>
+
+sethandler <C-2> a:vim
+"sethandler <C-S-2> a:ide
+sethandler <C-A> a:vim
+sethandler <C-C> a:vim
+sethandler <C-D> a:vim
+sethandler <C-E> a:vim
+sethandler <C-G> a:vim
+sethandler <C-H> a:vim
+sethandler <C-I> a:vim
+"sethandler <C-J> a:ide
+sethandler <C-S-J> a:vim
+sethandler <A-J> a:vim
+sethandler <C-K> a:vim
+sethandler <C-L> a:vim
+sethandler <C-M> a:vim
+sethandler <C-N> a:vim
+sethandler <C-O> a:vim
+sethandler <C-P> a:vim
+sethandler <C-Q> a:vim
+sethandler <C-S> a:vim
+sethandler <C-T> a:vim
+sethandler <C-U> a:vim
+sethandler <C-V> a:vim
+sethandler <C-W> a:vim
+sethandler <C-X> a:vim
+sethandler <C-Y> a:vim
+sethandler <C-[> a:vim
+sethandler <C-]> a:vim
