@@ -1,0 +1,172 @@
+
+set relativenumber
+set number
+set number relativenumber
+" set hlsearch
+set clipboard=unnamed,unamedplus
+set ignorecase
+
+set smartcase
+set ideamarks
+set which-key
+set incsearch
+set notimeout
+set timeoutlen=5000
+set so=1
+set showcmd
+set showmode
+set ideamarks
+set ideastatusicon
+set idearefactormode = "keep"
+set ideajoin
+set sidescroll=10
+
+" let mapleader ="\<Space>"
+let mapleader=" "
+set easymotion
+
+set NERDTree
+set sneak
+set surround
+set multiple-cursors
+set commentary
+"set ReplaceWithRegister
+"set argtextobj
+set exchange
+"set textobj-entire
+set highlightedyank
+
+set keep-english-in-normal
+set keep-english-in-normal-and-restore-in-insert
+
+" idea vimrc editing
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+
+highlight CursorLine guibg=#000000 ctermbg=000
+
+
+" Press `f` to activate AceJump
+"map f :action AceAction<CR>
+" Press `F` to activate Target Mode
+"map F :action AceTargetAction<CR>
+" Press `g` to activate Line Mode
+"map g :action AceLineAction<CR>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+
+
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
+
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gt :action GotoTypeDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gr :action GotoRelated<CR>
+
+nnoremap gu :action GotoSuperMethod<CR>
+
+nnoremap g[ :action EditorCodeBlockStart<CR>
+nnoremap g] :action EditorCodeBlockEnd<CR>
+
+nnoremap g,    :action JumpToNextChange<CR>
+vnoremap g,    :action JumpToNextChange<CR>
+
+nnoremap g;    :action JumpToLastChange<CR>
+vnoremap g;    :action JumpToLastChange<CR>
+
+nnoremap zr    :action ExpandAllRegions<CR>
+vnoremap zr    :action ExpandAllRegions<CR>
+
+nnoremap zm    :action CollapseAllRegions<CR>
+vnoremap zm    :action CollapseAllRegions<CR>
+
+nnoremap zO    :action ExpandRegionRecursively<CR>
+vnoremap zO    :action ExpandRegionRecursively<CR>
+
+" bookmarks related
+nnoremap mm :action ShowBookmarks<CR>
+nnoremap mj :action GotoNextBookmark<CR>
+nnoremap mk :action GotoPreviousBookmark<CR>
+
+nnoremap ma :action ToggleBookmarkA<CR>
+nnoremap mb :action ToggleBookmarkB<CR>
+nnoremap mc :action ToggleBookmarkC<CR>
+nnoremap md :action ToggleBookmarkD<CR>
+nnoremap me :action ToggleBookmarkE<CR>
+nnoremap mf :action ToggleBookmarkF<CR>
+nnoremap mg :action ToggleBookmarkG<CR>
+nnoremap mh :action ToggleBookmarkH<CR>
+nnoremap mi :action ToggleBookmarkI<CR>
+nnoremap m1 :action ToggleBookmark1<CR>
+nnoremap m2 :action ToggleBookmark2<CR>
+nnoremap m3 :action ToggleBookmark3<CR>
+nnoremap m4 :action ToggleBookmark4<CR>
+nnoremap m5 :action ToggleBookmark5<CR>
+nnoremap m6 :action ToggleBookmark6<CR>
+nnoremap m7 :action ToggleBookmark7<CR>
+nnoremap m8 :action ToggleBookmark8<CR>
+nnoremap m9 :action ToggleBookmark9<CR>
+nnoremap m0 :action ToggleBookmark0<CR>
+
+nnoremap <A-X>     :action GotoAction<CR>
+vnoremap <A-X>     :action GotoAction<CR>
+inoremap <A-X>     :action GotoAction<CR>
+nmap <leader>n :NERDTreeFocus<CR>
+nmap <leader>e :action SearchEverywhere<CR>
+nmap <leader>T :action GotoClass<CR>
+nmap <leader>t :action GotoSymbol<CR>
+nmap <leader>f :action GotoFile<CR>
+nmap <leader>m :action RecentFiles<CR>
+nmap <leader>M :action RecentChangedFiles<CR>
+nmap <leader>] :action GotoImplementation<CR>
+nmap <a-j>     :action MethodDown<CR>
+nmap <a-k>     :action MethodUp<CR>
+" nmap <C-S-j>   :action AceTargetAction<CR>
+
+nmap <leader>p :action ActivateProblemsViewToolWindow<CR>
+
+" nmap <leader>ht : action TypeHierarchy<CR>
+nmap <leader>hm : action MethodHierarchy<CR>
+nmap <leader>hc : action CallHierarchy<CR>
+
+" git config
+vmap <leader>vh : action Vcs.ShowHistoryForBlock<CR>
+
+" file strucutr
+nmap <leader>i : action FileStructurePopup<CR>
+
+" bookmark config
+sethandler <C-2> a:vim
+"sethandler <C-S-2> a:ide
+sethandler <C-A> a:vim
+sethandler <C-C> a:vim
+sethandler <C-D> a:vim
+sethandler <C-E> a:vim
+sethandler <C-G> a:vim
+sethandler <C-H> a:vim
+sethandler <C-I> a:vim
+"sethandler <C-J> a:ide
+sethandler <C-S-J> a:vim
+sethandler <A-J> a:vim
+sethandler <C-K> a:vim
+sethandler <C-L> a:vim
+sethandler <C-M> a:vim
+sethandler <C-N> a:vim
+sethandler <C-O> a:vim
+sethandler <C-P> a:vim
+sethandler <C-Q> a:vim
+sethandler <C-S> a:vim
+sethandler <C-T> a:vim
+sethandler <C-U> a:vim
+sethandler <C-V> a:vim
+sethandler <C-W> a:vim
+sethandler <C-X> a:vim
+sethandler <C-Y> a:vim
+sethandler <C-[> a:vim
+sethandler <C-]> a:vim
+set clipboard+=ideaput
